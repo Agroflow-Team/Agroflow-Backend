@@ -1,0 +1,8 @@
+package com.agroflow.personnel.infrastructure.adapter.out.persistence
+
+import org.springframework.data.jpa.repository.JpaRepository
+import java.util.UUID
+
+interface SpringDataTaskRepository : JpaRepository<TaskEntity, UUID> {
+    fun findByTrabajadorId(trabajadorId: UUID): List<TaskEntity>
+}

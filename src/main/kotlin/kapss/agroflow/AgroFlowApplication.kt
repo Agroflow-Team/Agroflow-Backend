@@ -1,4 +1,4 @@
-package kapss.agroflow
+package com.agroflow
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
