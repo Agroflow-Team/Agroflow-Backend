@@ -1,29 +1,28 @@
 package com.agroflow.inventory.domain.model
 
-import java.util.UUID
-import java.time.LocalDateTime
 import java.math.BigDecimal
+import java.time.LocalDateTime
+import java.util.UUID
 
-class InventoryItem(
+enum class TipoItemEnum {
+    // Reemplazar con los valores exactos del tipo_item_enum en Postgres
+    INSUMO, HERRAMIENTA, MAQUINARIA, SEMILLA
+}
+
+enum class EstadoSincronizacionEnum {
+    PENDIENTE, SINCRONIZADO, ERROR
+}
+
+data class InventoryItem(
     val id: UUID? = null,
     val fincaId: UUID,
     val registradoPorTrabajadorId: UUID,
-    var nombreItem: String,
-    var tipo: String, // Podria ser un Enum mas adelante si lo deseas
-    var cantidad: BigDecimal,
-    var unidadMedida: String,
-    var costoUnitario: BigDecimal,
-    var fechaActualizacion: LocalDateTime = LocalDateTime.now(),
-    var eliminado: Boolean = false,
-    var estadoSincronizacion: String = "PENDIENTE"
-) {
-    // Ejemplo de regla de negocio en el dominio
-    fun actualizarCantidad(nuevaCantidad: BigDecimal) {
-        if (nuevaCantidad < BigDecimal.ZERO) {
-            throw IllegalArgumentException("La cantidad no puede ser negativa")
-        }
-        this.cantidad = nuevaCantidad
-        this.fechaActualizacion = LocalDateTime.now()
-        this.estadoSincronizacion = "MODIFICADO"
-    }
-}
+    val nombreItem: String,
+    val tipo: TipoItemEnum,
+    val cantidad: BigDecimal,
+    val unidadMedida: String,
+    val fechaActualizacion: LocalDateTime = LocalDateTime.now(),
+    val eliminado: Boolean = false,
+    val costoUnitario: BigDecimal? = null,
+    val estadoSincronizacion: EstadoSincronizacionEnum = EstadoSincronizacionEnum.SINCRONIZADO
+)
