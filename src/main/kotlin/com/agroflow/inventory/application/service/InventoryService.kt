@@ -56,4 +56,8 @@ class InventoryService(
 
         return repository.save(updatedItem)
     }
+
+    override fun deleteItem(itemId: UUID) {
+        repository.deleteById(itemId)
+    }
 }

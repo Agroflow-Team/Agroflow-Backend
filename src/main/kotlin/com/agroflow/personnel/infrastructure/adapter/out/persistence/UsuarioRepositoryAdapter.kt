@@ -17,4 +17,8 @@ class UsuarioRepositoryAdapter(
     override fun findIdByCorreo(correo: String): Optional<UUID> {
         return repository.findByCorreo(correo).map { it.id }
     }
+
+    override fun save(entity: UsuarioEntity): UsuarioEntity {
+        return repository.save(entity)
+    }
 }

@@ -46,7 +46,10 @@ class TaskEntity(
     var eliminado: Boolean,
 
     @Column(name = "estado_sincronizacion")
-    var estadoSincronizacion: String
+    var estadoSincronizacion: String,
+
+    @Column(name = "severidad_novedad")
+    val severidadNovedad: String? = null
 ) {
     // Funciones para convertir entre la Base de Datos (Entity) y el Dominio (Task)
     fun toDomain(): Task = Task(
@@ -61,7 +64,8 @@ class TaskEntity(
         novedades = novedades,
         fechaActualizacion = fechaActualizacion,
         eliminado = eliminado,
-        estadoSincronizacion = estadoSincronizacion
+        estadoSincronizacion = estadoSincronizacion,
+        severidadNovedad = severidadNovedad
     )
 
     companion object {
@@ -77,7 +81,8 @@ class TaskEntity(
             novedades = task.novedades,
             fechaActualizacion = task.fechaActualizacion,
             eliminado = task.eliminado,
-            estadoSincronizacion = task.estadoSincronizacion
+            estadoSincronizacion = task.estadoSincronizacion,
+            severidadNovedad = task.severidadNovedad
         )
     }
 }

@@ -16,13 +16,15 @@ class Task(
     var novedades: String? = null,
     var fechaActualizacion: LocalDateTime = LocalDateTime.now(),
     var eliminado: Boolean = false,
-    var estadoSincronizacion: String = "PENDIENTE"
+    var estadoSincronizacion: String = "PENDIENTE",
+    var severidadNovedad: String? = null
 ) {
     // Regla de negocio para el trabajador
-    fun reportarAvance(nuevasHoras: BigDecimal, nuevaNovedad: String, nuevoEstado: TaskStatus) {
+    fun reportarAvance(nuevasHoras: BigDecimal, nuevaNovedad: String, nuevoEstado: TaskStatus, nuevaSeveridad: String? = null) {
         this.horasInvertidas = this.horasInvertidas.add(nuevasHoras)
         this.novedades = nuevaNovedad
         this.estado = nuevoEstado
+        this.severidadNovedad = nuevaSeveridad
         this.fechaActualizacion = LocalDateTime.now()
         this.estadoSincronizacion = "MODIFICADO"
     }

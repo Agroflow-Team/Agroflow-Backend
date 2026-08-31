@@ -4,4 +4,5 @@ import com.agroflow.personnel.domain.model.Finca
 
 interface FincaRepositoryPort {
     fun findAll(): List<Finca>
+    fun save(finca: Finca): Finca
 }

@@ -7,5 +7,6 @@ import java.util.UUID
 
 interface ManageTaskUseCase {
     fun getTasksByWorker(trabajadorId: UUID): List<Task>
-    fun updateTaskProgress(taskId: UUID, trabajadorId: UUID, nuevasHoras: BigDecimal, novedades: String, nuevoEstado: TaskStatus): Task
+    fun getTasksByFinca(fincaId: UUID): List<Task>
+    fun updateTaskProgress(taskId: UUID, trabajadorId: UUID, nuevasHoras: BigDecimal, novedades: String, nuevoEstado: TaskStatus, severidadNovedad: String? = null): Task
 }

@@ -23,4 +23,12 @@ class FincaEntity(
         nombre = nombre,
         fechaRegistro = fechaRegistro
     )
+
+    companion object {
+        fun fromDomain(finca: Finca): FincaEntity = FincaEntity(
+            id = finca.id ?: UUID.randomUUID(),
+            nombre = finca.nombre,
+            fechaRegistro = finca.fechaRegistro
+        )
+    }
 }

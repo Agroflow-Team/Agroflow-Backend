@@ -5,4 +5,5 @@ import java.util.UUID
 
 interface SpringDataTaskRepository : JpaRepository<TaskEntity, UUID> {
     fun findByTrabajadorId(trabajadorId: UUID): List<TaskEntity>
+    fun findByFincaId(fincaId: UUID): List<TaskEntity>
 }

@@ -60,6 +60,13 @@ class InventoryController(
         val updated = manageInventoryUseCase.updateItem(itemId, request.nombreItem, request.cantidad, request.unidadMedida)
         return ResponseEntity.ok(updated)
     }
+
+    // Eliminar un ítem (DELETE /api/inventory/{itemId})
+    @DeleteMapping("/{itemId}")
+    fun deleteItem(@PathVariable itemId: UUID): ResponseEntity<Void> {
+        manageInventoryUseCase.deleteItem(itemId)
+        return ResponseEntity.noContent().build()
+    }
 }
 
 data class CreateInventoryItemRequest(

@@ -37,6 +37,12 @@ class TaskController(
         return ResponseEntity.ok(tasks)
     }
 
+    @GetMapping("/finca/{fincaId}")
+    fun getTasksByFinca(@PathVariable fincaId: UUID): ResponseEntity<List<Task>> {
+        val tasks = manageTaskUseCase.getTasksByFinca(fincaId)
+        return ResponseEntity.ok(tasks)
+    }
+
     @PatchMapping("/{taskId}/progress")
     fun updateProgress(
         @PathVariable taskId: UUID,
@@ -47,7 +53,8 @@ class TaskController(
             request.trabajadorId,
             request.nuevasHoras,
             request.novedades,
-            request.nuevoEstado
+            request.nuevoEstado,
+            request.severidadNovedad
         )
         return ResponseEntity.ok(updatedTask)
     }
@@ -67,5 +74,6 @@ data class UpdateProgressRequest(
     val trabajadorId: UUID,
     val nuevasHoras: BigDecimal,
     val novedades: String,
-    val nuevoEstado: TaskStatus
+    val nuevoEstado: TaskStatus,
+    val severidadNovedad: String? = null
 )

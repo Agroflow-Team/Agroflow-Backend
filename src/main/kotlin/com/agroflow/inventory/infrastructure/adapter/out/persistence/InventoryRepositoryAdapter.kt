@@ -26,6 +26,26 @@ class InventoryRepositoryAdapter(
         return repository.findByFincaIdAndEliminadoFalse(fincaId).map { toDomain(it) }
     }
 
+    override fun deleteById(id: UUID) {
+        repository.findById(id).ifPresent { entity ->
+            // Soft delete or delete
+            val updated = InventoryEntity(
+                id = entity.id,
+                fincaId = entity.fincaId,
+                registradoPorTrabajadorId = entity.registradoPorTrabajadorId,
+                nombreItem = entity.nombreItem,
+                tipo = entity.tipo,
+                cantidad = entity.cantidad,
+                unidadMedida = entity.unidadMedida,
+                fechaActualizacion = java.time.LocalDateTime.now(),
+                eliminado = true,
+                costoUnitario = entity.costoUnitario,
+                estadoSincronizacion = entity.estadoSincronizacion
+            )
+            repository.save(updated)
+        }
+    }
+
     // Transformadores (Mappers)
     private fun toEntity(domain: InventoryItem): InventoryEntity {
         return InventoryEntity(

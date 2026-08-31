@@ -9,14 +9,25 @@ import java.util.UUID
 class TrabajadorRepositoryAdapter(
     private val repository: SpringDataTrabajadorRepository
 ) : TrabajadorRepositoryPort {
-    override val findAll: Any
-        get() = TODO("Not yet implemented")
-
     override fun findAll(): List<Trabajador> {
         return repository.findAll().map { it.toDomain() }
     }
 
     override fun findByFincaId(fincaId: UUID): List<Trabajador> {
         return repository.findByFincaId(fincaId).map { it.toDomain() }
+    }
+
+    override fun save(trabajador: Trabajador): Trabajador {
+        val entity = TrabajadorEntity.fromDomain(trabajador)
+        val saved = repository.save(entity)
+        return saved.toDomain()
+    }
+
+    override fun findById(id: UUID): Trabajador? {
+        return repository.findById(id).map { it.toDomain() }.orElse(null)
+    }
+
+    override fun deleteById(id: UUID) {
+        repository.deleteById(id)
     }
 }

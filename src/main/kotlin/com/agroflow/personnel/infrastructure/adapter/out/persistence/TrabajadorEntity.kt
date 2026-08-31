@@ -40,4 +40,16 @@ class TrabajadorEntity(
         tarifaHora = tarifaHora,
         fechaRegistro = fechaRegistro
     )
+
+    companion object {
+        fun fromDomain(domain: Trabajador): TrabajadorEntity = TrabajadorEntity(
+            id = domain.id ?: UUID.randomUUID(),
+            usuarioId = domain.usuarioId,
+            fincaId = domain.fincaId,
+            nombreCompleto = domain.nombreCompleto,
+            documento = domain.documento,
+            tarifaHora = domain.tarifaHora,
+            fechaRegistro = domain.fechaRegistro
+        )
+    }
 }

@@ -11,4 +11,9 @@ class FincaRepositoryAdapter(
     override fun findAll(): List<Finca> {
         return repository.findAll().map { it.toDomain() }
     }
+
+    override fun save(finca: Finca): Finca {
+        val entity = FincaEntity.fromDomain(finca)
+        return repository.save(entity).toDomain()
+    }
 }

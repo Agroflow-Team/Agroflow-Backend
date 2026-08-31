@@ -17,12 +17,17 @@ class TaskService(
         return taskRepository.findByTrabajadorId(trabajadorId)
     }
 
+    override fun getTasksByFinca(fincaId: UUID): List<Task> {
+        return taskRepository.findByFincaId(fincaId)
+    }
+
     override fun updateTaskProgress(
         taskId: UUID,
         trabajadorId: UUID,
         nuevasHoras: BigDecimal,
         novedades: String,
-        nuevoEstado: TaskStatus
+        nuevoEstado: TaskStatus,
+        severidadNovedad: String?
     ): Task {
         // 1. Buscamos la tarea en la base de datos
         val task = taskRepository.findById(taskId)
@@ -34,7 +39,7 @@ class TaskService(
         }
 
         // 3. Actualizamos usando la funcion pura de nuestro Dominio
-        task.reportarAvance(nuevasHoras, novedades, nuevoEstado)
+        task.reportarAvance(nuevasHoras, novedades, nuevoEstado, severidadNovedad)
 
         // 4. Guardamos los cambios
         return taskRepository.save(task)

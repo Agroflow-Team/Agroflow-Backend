@@ -23,4 +23,8 @@ class TaskRepositoryAdapter(
     override fun findByTrabajadorId(trabajadorId: UUID): List<Task> {
         return repository.findByTrabajadorId(trabajadorId).map { it.toDomain() }
     }
+
+    override fun findByFincaId(fincaId: UUID): List<Task> {
+        return repository.findByFincaId(fincaId).map { it.toDomain() }
+    }
 }

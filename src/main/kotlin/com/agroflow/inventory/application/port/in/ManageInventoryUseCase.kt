@@ -8,4 +8,5 @@ interface ManageInventoryUseCase {
     fun getByFinca(fincaId: UUID): List<InventoryItem>
     fun updateStock(itemId: UUID, cantidadUsada: BigDecimal): InventoryItem
     fun updateItem(itemId: UUID, nombreItem: String, cantidad: BigDecimal, unidadMedida: String): InventoryItem
+    fun deleteItem(itemId: UUID)
 }

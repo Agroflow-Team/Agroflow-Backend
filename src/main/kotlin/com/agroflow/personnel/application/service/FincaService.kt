@@ -12,4 +12,9 @@ class FincaService(
     override fun getAllFincas(): List<Finca> {
         return fincaRepository.findAll()
     }
+
+    override fun createFinca(nombre: String): Finca {
+        val finca = Finca(nombre = nombre)
+        return fincaRepository.save(finca)
+    }
 }

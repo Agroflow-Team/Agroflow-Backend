@@ -7,4 +7,5 @@ interface InventoryRepositoryPort {
     fun save(item: InventoryItem): InventoryItem
     fun findById(id: UUID): InventoryItem?
     fun findByFincaId(fincaId: UUID): List<InventoryItem>
+    fun deleteById(id: UUID)
 }
