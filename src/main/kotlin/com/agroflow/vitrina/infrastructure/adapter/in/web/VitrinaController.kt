@@ -54,7 +54,7 @@ class VitrinaController(
             precio = request.precio,
             cantidadDisponible = request.cantidadDisponible,
             imagenUrl = request.imagenUrl,
-            estadoPublicacion = request.estadoPublicacion,
+            estadoPublicacion = request.estadoPublicacion ?: EstadoPublicacion.ACTIVA,
             fechaCreacion = LocalDateTime.now(), // not used in update
             estadoSincronizacion = "SINCRONIZADO"
         )
@@ -66,6 +66,12 @@ class VitrinaController(
     fun cambiarEstado(@PathVariable id: UUID, @RequestBody request: CambiarEstadoRequest): ResponseEntity<Publicacion> {
         val updated = manageVitrinaUseCase.cambiarEstado(id, request.estado)
         return ResponseEntity.ok(updated)
+    }
+
+    @DeleteMapping("/{id}")
+    fun eliminarPublicacion(@PathVariable id: UUID): ResponseEntity<Void> {
+        manageVitrinaUseCase.eliminarPublicacion(id)
+        return ResponseEntity.noContent().build()
     }
 }
 
@@ -87,7 +93,7 @@ data class EditarPublicacionRequest(
     val precio: BigDecimal,
     val cantidadDisponible: Int,
     val imagenUrl: String?,
-    val estadoPublicacion: EstadoPublicacion
+    val estadoPublicacion: EstadoPublicacion? = null
 )
 
 data class CambiarEstadoRequest(

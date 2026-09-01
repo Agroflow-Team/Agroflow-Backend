@@ -41,6 +41,10 @@ class PublicacionRepositoryAdapter(
         return repository.findByFincaId(fincaId).map { toDomain(it) }
     }
 
+    override fun deleteById(id: UUID) {
+        repository.deleteById(id)
+    }
+
     private fun toDomain(entity: PublicacionEntity): Publicacion {
         return Publicacion(
             id = entity.id,

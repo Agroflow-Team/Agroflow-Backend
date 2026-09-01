@@ -10,4 +10,5 @@ interface ManageVitrinaUseCase {
     fun crearPublicacion(publicacion: Publicacion): Publicacion
     fun editarPublicacion(id: UUID, publicacion: Publicacion): Publicacion
     fun cambiarEstado(id: UUID, estado: EstadoPublicacion): Publicacion
+    fun eliminarPublicacion(id: UUID)
 }

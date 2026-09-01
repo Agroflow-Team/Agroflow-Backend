@@ -9,4 +9,5 @@ interface PublicacionRepositoryPort {
     fun findById(id: UUID): Publicacion?
     fun findByEstado(estado: EstadoPublicacion): List<Publicacion>
     fun findByFincaId(fincaId: UUID): List<Publicacion>
+    fun deleteById(id: UUID)
 }

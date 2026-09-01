@@ -33,17 +33,19 @@ class VitrinaService(
             descripcion = publicacion.descripcion,
             precio = publicacion.precio,
             cantidadDisponible = publicacion.cantidadDisponible,
-            imagenUrl = publicacion.imagenUrl,
-            estadoPublicacion = publicacion.estadoPublicacion
+            imagenUrl = publicacion.imagenUrl
         )
         return publicacionRepository.save(updated)
     }
 
     override fun cambiarEstado(id: UUID, estado: EstadoPublicacion): Publicacion {
         val existing = publicacionRepository.findById(id)
-            ?: throw IllegalArgumentException("Publicacion con id $id no encontrada")
-
+            ?: throw IllegalArgumentException("Publicacion no encontrada")
         val updated = existing.copy(estadoPublicacion = estado)
         return publicacionRepository.save(updated)
+    }
+
+    override fun eliminarPublicacion(id: UUID) {
+        publicacionRepository.deleteById(id)
     }
 }
