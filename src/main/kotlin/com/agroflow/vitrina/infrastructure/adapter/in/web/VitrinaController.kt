@@ -62,6 +62,31 @@ class VitrinaController(
         return ResponseEntity.ok(updated)
     }
 
+    @PostMapping("/upload-image")
+    fun uploadImage(@RequestParam("file") file: org.springframework.web.multipart.MultipartFile): ResponseEntity<Map<String, String>> {
+        if (file.isEmpty) {
+            return ResponseEntity.badRequest().build()
+        }
+        try {
+            val uploadsDir = java.io.File("uploads")
+            if (!uploadsDir.exists()) {
+                uploadsDir.mkdir()
+            }
+            val originalFilename = file.originalFilename ?: "image.jpg"
+            val extension = originalFilename.substringAfterLast('.', "jpg")
+            val newFilename = "${UUID.randomUUID()}.$extension"
+            
+            val destFile = java.io.File(uploadsDir, newFilename)
+            file.transferTo(destFile)
+            
+            // The image will be accessible at /uploads/{newFilename}
+            val imageUrl = "/uploads/$newFilename"
+            return ResponseEntity.ok(mapOf("url" to imageUrl))
+        } catch (e: Exception) {
+            return ResponseEntity.internalServerError().build()
+        }
+    }
+
     @PatchMapping("/{id}/estado")
     fun cambiarEstado(@PathVariable id: UUID, @RequestBody request: CambiarEstadoRequest): ResponseEntity<Publicacion> {
         val updated = manageVitrinaUseCase.cambiarEstado(id, request.estado)
