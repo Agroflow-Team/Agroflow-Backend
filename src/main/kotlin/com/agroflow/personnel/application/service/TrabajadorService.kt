@@ -79,9 +79,11 @@ class TrabajadorService(
     }
 
     override fun getTrabajadorSummary(id: UUID): TrabajadorSummaryResponse {
-        val trabajador = trabajadorRepository.findById(id)
-            ?: throw IllegalArgumentException("Trabajador no encontrado")
-        val tareas = taskRepository.findByTrabajadorId(id)
+        // Find by Trabajador ID first, if not found, find by Usuario ID
+        val trabajador = trabajadorRepository.findById(id) 
+            ?: trabajadorRepository.findAll().find { it.usuarioId == id }
+            ?: throw IllegalArgumentException("Trabajador no encontrado con ID o UsuarioID: $id")
+        val tareas = taskRepository.findByTrabajadorId(trabajador.id ?: id)
 
         var horas = BigDecimal.ZERO
         var completadas = 0
@@ -100,7 +102,7 @@ class TrabajadorService(
         }
 
         return TrabajadorSummaryResponse(
-            trabajadorId = id,
+            trabajadorId = trabajador.id ?: id,
             nombreCompleto = trabajador.nombreCompleto,
             tarifaHora = trabajador.tarifaHora,
             totalHorasTrabajadas = horas,
