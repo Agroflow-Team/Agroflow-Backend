@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RestController
 
 data class LoginRequest(
     val correo: String,
-    val clave: String
+    val clave: String,
+    val fcmToken: String? = null
 )
 
 @RestController
@@ -21,7 +22,7 @@ class AuthController(
     @PostMapping("/login")
     fun login(@RequestBody request: LoginRequest): ResponseEntity<Any> {
         return try {
-            val response = authService.login(request.correo, request.clave)
+            val response = authService.login(request.correo, request.clave, request.fcmToken)
             ResponseEntity.ok(response)
         } catch (e: Exception) {
             ResponseEntity.status(401).body(mapOf("error" to (e.message ?: "Unauthorized")))
