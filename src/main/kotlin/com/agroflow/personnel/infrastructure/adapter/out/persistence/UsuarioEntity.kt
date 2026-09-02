@@ -24,6 +24,9 @@ class UsuarioEntity(
     @Column(name = "estado")
     val estado: String,
 
+    @Column(name = "fcm_token")
+    var fcmToken: String? = null,
+
     @Column(name = "fecha_creacion")
     val fechaCreacion: LocalDateTime = LocalDateTime.now()
 ) {
@@ -31,6 +34,7 @@ class UsuarioEntity(
         id = id,
         rolId = rolId,
         correo = correo,
-        estado = estado
+        estado = estado,
+        fcmToken = fcmToken
     )
 }

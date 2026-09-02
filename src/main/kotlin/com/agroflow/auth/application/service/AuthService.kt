@@ -12,7 +12,7 @@ class AuthService(
     private val passwordEncoder: PasswordEncoder,
     private val jwtUtils: JwtUtils
 ) {
-    fun login(correo: String, clave: String): Map<String, String> {
+    fun login(correo: String, clave: String, fcmToken: String? = null): Map<String, String> {
         val userEntity = usuarioRepository.findByCorreo(correo)
             .orElseThrow { RuntimeException("User not found") }
 
@@ -20,6 +20,11 @@ class AuthService(
         
         if (!isPasswordMatch) {
             throw RuntimeException("Invalid credentials")
+        }
+
+        if (fcmToken != null && userEntity.fcmToken != fcmToken) {
+            userEntity.fcmToken = fcmToken
+            usuarioRepository.save(userEntity)
         }
 
         val token = jwtUtils.generateToken(userEntity.id.toString(), userEntity.rolId.toString())
