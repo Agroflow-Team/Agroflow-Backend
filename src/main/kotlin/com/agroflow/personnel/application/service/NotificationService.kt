@@ -1,4 +1,4 @@
-﻿package com.agroflow.personnel.application.service
+package com.agroflow.personnel.application.service
 
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.Message
@@ -24,6 +24,7 @@ class NotificationService {
             println("Notificacion enviada correctamente: $response")
         } catch (e: Exception) {
             println("Error enviando notificacion: $e")
+            throw e
         }
     }
 }
