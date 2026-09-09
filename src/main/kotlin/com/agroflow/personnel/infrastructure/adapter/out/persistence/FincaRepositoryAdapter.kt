@@ -3,6 +3,7 @@ package com.agroflow.personnel.infrastructure.adapter.out.persistence
 import com.agroflow.personnel.application.port.out.FincaRepositoryPort
 import com.agroflow.personnel.domain.model.Finca
 import org.springframework.stereotype.Repository
+import java.util.UUID
 
 @Repository
 class FincaRepositoryAdapter(
@@ -16,4 +17,9 @@ class FincaRepositoryAdapter(
         val entity = FincaEntity.fromDomain(finca)
         return repository.save(entity).toDomain()
     }
+
+    override fun deleteById(id: UUID) {
+        repository.deleteById(id)
+    }
+
 }

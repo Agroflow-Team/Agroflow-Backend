@@ -22,6 +22,16 @@ class FincaController(
         val finca = findFincasUseCase.createFinca(request.nombre)
         return ResponseEntity.ok(finca)
     }
+
+    @DeleteMapping("/{id}")
+    fun deleteFinca(@PathVariable id: java.util.UUID): ResponseEntity<Any> {
+        return try {
+            findFincasUseCase.deleteFinca(id)
+            ResponseEntity.noContent().build()
+        } catch (e: IllegalStateException) {
+            ResponseEntity.status(org.springframework.http.HttpStatus.CONFLICT).body(mapOf("error" to e.message))
+        }
+    }
 }
 
 data class CreateFincaRequest(

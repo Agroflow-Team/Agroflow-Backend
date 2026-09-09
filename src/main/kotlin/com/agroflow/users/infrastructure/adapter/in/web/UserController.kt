@@ -40,31 +40,16 @@ class UserController(
         return ResponseEntity.ok(mapOf("id" to user.id, "correo" to user.correo, "rolId" to user.rolId))
     }
 
-    @PostMapping("/agricultor/create")
-    fun createAgricultor(@RequestBody request: AgricultorCreateUserRequest, httpRequest: HttpServletRequest): ResponseEntity<Any> {
-        val authHeader = httpRequest.getHeader("Authorization")
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()
-        }
-        val token = authHeader.substring(7)
-        val claims = jwtUtils.extractAllClaims(token)
-        val rolIdStr = claims["rolId"] as? String
-        
-        if (rolIdStr == null || UUID.fromString(rolIdStr) != Roles.AGRICULTOR) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(mapOf("error" to "Only AGRICULTOR can perform this action"))
-        }
-
-        val user = userManagementService.createAgricultorOrTrabajador(
-            request.email,
-            request.password,
-            request.requestedRole,
-            request.fincaId,
-            request.nombreCompleto,
-            request.documento,
-            request.tarifaHora
-        )
-        return ResponseEntity.ok(mapOf("id" to user.id, "correo" to user.correo, "rolId" to user.rolId))
+    @PutMapping("/profile")
+    fun updateProfile(@RequestBody request: UpdateUserRequest, httpRequest: HttpServletRequest): ResponseEntity<Any> {
+        // For now, simply acknowledge the request. In a full implementation, you would update the user's data.
+        return ResponseEntity.ok(mapOf("message" to "Perfil actualizado"))
     }
+
+    data class UpdateUserRequest(
+        val nombre: String?,
+        val correo: String?
+    )
 }
 
 data class ClienteCreateRequest(

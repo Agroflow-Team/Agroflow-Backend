@@ -23,7 +23,7 @@ class FinanzasController(
         return ResponseEntity.ok(balance)
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     fun registrarTransaccion(@RequestBody request: TransaccionRequest): ResponseEntity<Transaccion> {
         val transaccion = Transaccion(
             fincaId = request.fincaId,
