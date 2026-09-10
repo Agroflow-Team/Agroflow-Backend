@@ -3,7 +3,7 @@ package com.agroflow.finance.infrastructure.adapter.`in`.web
 import com.agroflow.finance.application.port.`in`.BalanceResponse
 import com.agroflow.finance.application.port.`in`.ManageFinanzasUseCase
 import com.agroflow.finance.domain.model.Transaccion
-import com.agroflow.finance.domain.model.TransaccionCategoria
+
 import com.agroflow.finance.domain.model.TransaccionTipo
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -41,7 +41,7 @@ class FinanzasController(
 data class TransaccionRequest(
     val fincaId: UUID,
     val tipoMovimiento: TransaccionTipo,
-    val categoria: TransaccionCategoria,
+    val categoria: String,
     val montoTotal: BigDecimal,
     val fechaTransaccion: LocalDateTime? = null
 )

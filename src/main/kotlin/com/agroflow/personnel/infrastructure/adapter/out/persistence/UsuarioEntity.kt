@@ -28,7 +28,19 @@ class UsuarioEntity(
     var fcmToken: String? = null,
 
     @Column(name = "fecha_creacion")
-    val fechaCreacion: LocalDateTime = LocalDateTime.now()
+    val fechaCreacion: LocalDateTime = LocalDateTime.now(),
+
+    @Column(name = "nombre")
+    var nombre: String? = null,
+
+    @Column(name = "telefono")
+    var telefono: String? = null,
+
+    @Column(name = "direccion")
+    var direccion: String? = null,
+
+    @Column(name = "foto_url")
+    var fotoUrl: String? = null
 ) {
     fun toDomain(): Usuario = Usuario(
         id = id,

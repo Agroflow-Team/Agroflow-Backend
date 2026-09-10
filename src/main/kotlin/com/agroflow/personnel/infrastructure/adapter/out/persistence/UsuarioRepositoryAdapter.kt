@@ -21,4 +21,8 @@ class UsuarioRepositoryAdapter(
     override fun save(entity: UsuarioEntity): UsuarioEntity {
         return repository.save(entity)
     }
+
+    override fun findById(id: UUID): Optional<UsuarioEntity> {
+        return repository.findById(id)
+    }
 }

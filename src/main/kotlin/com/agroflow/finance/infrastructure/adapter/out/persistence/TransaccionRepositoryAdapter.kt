@@ -2,7 +2,6 @@ package com.agroflow.finance.infrastructure.adapter.out.persistence
 
 import com.agroflow.finance.application.port.out.TransaccionRepositoryPort
 import com.agroflow.finance.domain.model.Transaccion
-import com.agroflow.finance.domain.model.TransaccionCategoria
 import com.agroflow.finance.domain.model.TransaccionTipo
 import org.springframework.stereotype.Component
 import java.util.UUID
@@ -17,7 +16,7 @@ class TransaccionRepositoryAdapter(
             id = transaccion.id ?: UUID.randomUUID(),
             fincaId = transaccion.fincaId,
             tipoMovimiento = transaccion.tipoMovimiento.name,
-            categoria = transaccion.categoria.name,
+            categoria = transaccion.categoria,
             montoTotal = transaccion.montoTotal,
             fechaTransaccion = transaccion.fechaTransaccion,
             estadoSincronizacion = transaccion.estadoSincronizacion
@@ -35,7 +34,7 @@ class TransaccionRepositoryAdapter(
             id = entity.id,
             fincaId = entity.fincaId,
             tipoMovimiento = TransaccionTipo.valueOf(entity.tipoMovimiento),
-            categoria = TransaccionCategoria.valueOf(entity.categoria),
+            categoria = entity.categoria,
             montoTotal = entity.montoTotal,
             fechaTransaccion = entity.fechaTransaccion,
             estadoSincronizacion = entity.estadoSincronizacion

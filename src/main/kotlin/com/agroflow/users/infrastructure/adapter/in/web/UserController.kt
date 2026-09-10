@@ -40,15 +40,22 @@ class UserController(
         return ResponseEntity.ok(mapOf("id" to user.id, "correo" to user.correo, "rolId" to user.rolId))
     }
 
-    @PutMapping("/profile")
-    fun updateProfile(@RequestBody request: UpdateUserRequest, httpRequest: HttpServletRequest): ResponseEntity<Any> {
-        // For now, simply acknowledge the request. In a full implementation, you would update the user's data.
-        return ResponseEntity.ok(mapOf("message" to "Perfil actualizado"))
+    @PutMapping("/{id}")
+    fun updateProfile(@PathVariable id: String, @RequestBody request: UpdateUserRequest, httpRequest: HttpServletRequest): ResponseEntity<Any> {
+        return try {
+            val uuid = UUID.fromString(id)
+            userManagementService.updateProfile(uuid, request.nombre, request.telefono, request.direccion, request.fotoPerfilUrl)
+            ResponseEntity.ok(mapOf("message" to "Perfil actualizado"))
+        } catch (e: Exception) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body(mapOf("error" to e.message))
+        }
     }
 
     data class UpdateUserRequest(
         val nombre: String?,
-        val correo: String?
+        val telefono: String?,
+        val direccion: String?,
+        val fotoPerfilUrl: String?
     )
 }
 

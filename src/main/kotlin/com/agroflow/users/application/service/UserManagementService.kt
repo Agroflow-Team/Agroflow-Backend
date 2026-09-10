@@ -91,4 +91,18 @@ class UserManagementService(
 
         return savedUser
     }
+
+    fun updateProfile(id: UUID, nombre: String?, telefono: String?, direccion: String?, fotoUrl: String?) {
+        val userOpt = usuarioRepository.findById(id)
+        if (userOpt.isPresent) {
+            val user = userOpt.get()
+            if (nombre != null) user.nombre = nombre
+            if (telefono != null) user.telefono = telefono
+            if (direccion != null) user.direccion = direccion
+            if (fotoUrl != null) user.fotoUrl = fotoUrl
+            usuarioRepository.save(user)
+        } else {
+            throw IllegalArgumentException("User not found")
+        }
+    }
 }
