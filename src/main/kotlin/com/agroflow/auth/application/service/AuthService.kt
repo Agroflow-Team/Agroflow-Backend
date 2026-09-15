@@ -36,4 +36,18 @@ class AuthService(
             "rolId" to userEntity.rolId.toString()
         )
     }
+
+    fun updateFcmToken(usuarioId: String, fcmToken: String) {
+        val userUuid = try {
+            java.util.UUID.fromString(usuarioId)
+        } catch (e: Exception) {
+            throw IllegalArgumentException("Invalid UUID: $usuarioId")
+        }
+        val userEntity = usuarioRepository.findById(userUuid)
+            .orElseThrow { RuntimeException("User not found with id: $usuarioId") }
+
+        userEntity.fcmToken = fcmToken
+        usuarioRepository.save(userEntity)
+        println("AuthService: FCM Token actualizado exitosamente para usuario ${userEntity.correo}")
+    }
 }

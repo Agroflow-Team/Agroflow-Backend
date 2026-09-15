@@ -31,6 +31,7 @@ class SecurityConfig(
                 it.requestMatchers("/api/auth/**").permitAll()
                 it.requestMatchers("/api/fincas/**").permitAll()
                 it.requestMatchers("/api/users/cliente").permitAll()
+                it.requestMatchers("/api/debug/**").permitAll()
                 it.requestMatchers("/error").permitAll()
                 it.anyRequest().authenticated()
             }

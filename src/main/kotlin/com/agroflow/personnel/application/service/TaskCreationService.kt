@@ -20,20 +20,30 @@ class TaskCreationService(
         val savedTask = taskRepository.save(task)
         
         try {
+            println("TaskCreationService: Procesando notificación para tarea '${task.titulo}' con trabajadorId=${task.trabajadorId}")
+            
+            // 1. Buscar si trabajadorId es el ID de perfil o el ID de usuario
             val trabajador = trabajadorRepository.findById(task.trabajadorId)
-            if (trabajador != null) {
-                val usuarioEntity = usuarioRepository.findById(trabajador.usuarioId).orElse(null)
-                val token = usuarioEntity?.fcmToken
-                
-                if (token != null && token.isNotBlank()) {
-                    notificationService.sendPushNotification(
-                        token = token,
-                        title = "¡Nueva tarea asignada!",
-                        body = "Tienes una nueva tarea: ${task.titulo}"
-                    )
-                }
+                ?: trabajadorRepository.findAll().find { it.usuarioId == task.trabajadorId }
+            
+            val usuarioId = trabajador?.usuarioId ?: task.trabajadorId
+            val usuarioEntity = usuarioRepository.findById(usuarioId).orElse(null)
+            
+            val token = usuarioEntity?.fcmToken
+            println("TaskCreationService: Usuario destinatario: ${usuarioEntity?.correo ?: "No encontrado"}, Token FCM: ${if (token.isNullOrBlank()) "NO DISPONIBLE / VACIO" else "PRESENTE (${token.take(12)}...)"}")
+            
+            if (!token.isNullOrBlank()) {
+                notificationService.sendPushNotification(
+                    token = token,
+                    title = "¡Nueva tarea asignada!",
+                    body = "Tienes una nueva tarea: ${task.titulo}"
+                )
+                println("TaskCreationService: Notificación push enviada con éxito para ${usuarioEntity?.correo}")
+            } else {
+                println("TaskCreationService: No se pudo enviar notificación push porque el usuario no tiene token FCM registrado en BD.")
             }
         } catch (e: Exception) {
+            println("TaskCreationService: Error al enviar notificación push: ${e.message}")
             e.printStackTrace()
         }
         

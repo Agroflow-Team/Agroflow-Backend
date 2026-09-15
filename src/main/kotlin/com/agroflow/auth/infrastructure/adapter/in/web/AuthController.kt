@@ -13,6 +13,11 @@ data class LoginRequest(
     val fcmToken: String? = null
 )
 
+data class UpdateFcmTokenRequest(
+    val usuarioId: String,
+    val fcmToken: String
+)
+
 @RestController
 @RequestMapping("/api/auth")
 class AuthController(
@@ -26,6 +31,16 @@ class AuthController(
             ResponseEntity.ok(response)
         } catch (e: Exception) {
             ResponseEntity.status(401).body(mapOf("error" to (e.message ?: "Unauthorized")))
+        }
+    }
+
+    @PostMapping("/fcm-token")
+    fun updateFcmToken(@RequestBody request: UpdateFcmTokenRequest): ResponseEntity<Any> {
+        return try {
+            authService.updateFcmToken(request.usuarioId, request.fcmToken)
+            ResponseEntity.ok(mapOf("message" to "FCM token updated successfully"))
+        } catch (e: Exception) {
+            ResponseEntity.status(400).body(mapOf("error" to (e.message ?: "Error updating FCM token")))
         }
     }
 }
