@@ -20,20 +20,35 @@ class TaskCreationService(
         val savedTask = taskRepository.save(task)
         
         try {
+            println("[TaskCreationService] Intentando enviar notificación para la tarea: ${task.titulo}, trabajadorId: ${task.trabajadorId}")
+            
+            var token: String? = null
+            
+            // 1. Intentar buscar por ID de perfil de trabajador
             val trabajador = trabajadorRepository.findById(task.trabajadorId)
             if (trabajador != null) {
                 val usuarioEntity = usuarioRepository.findById(trabajador.usuarioId).orElse(null)
-                val token = usuarioEntity?.fcmToken
-                
-                if (token != null && token.isNotBlank()) {
-                    notificationService.sendPushNotification(
-                        token = token,
-                        title = "¡Nueva tarea asignada!",
-                        body = "Tienes una nueva tarea: ${task.titulo}"
-                    )
-                }
+                token = usuarioEntity?.fcmToken
+            }
+            
+            // 2. Si no se encontró el token, intentar buscar directamente como usuarioId
+            if (token.isNullOrBlank()) {
+                val usuarioDirecto = usuarioRepository.findById(task.trabajadorId).orElse(null)
+                token = usuarioDirecto?.fcmToken
+            }
+            
+            if (!token.isNullOrBlank()) {
+                println("[TaskCreationService] Token FCM encontrado. Enviando push...")
+                notificationService.sendPushNotification(
+                    token = token,
+                    title = "¡Nueva tarea asignada!",
+                    body = "Tienes una nueva tarea: ${task.titulo}"
+                )
+            } else {
+                println("[TaskCreationService] WARN: No se encontró token FCM para el trabajador ID: ${task.trabajadorId}")
             }
         } catch (e: Exception) {
+            println("[TaskCreationService] ERROR al procesar notificación: ${e.message}")
             e.printStackTrace()
         }
         

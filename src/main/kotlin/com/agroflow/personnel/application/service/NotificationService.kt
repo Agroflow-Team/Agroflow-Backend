@@ -15,16 +15,31 @@ class NotificationService {
                 .setBody(body)
                 .build()
 
+            val androidConfig = com.google.firebase.messaging.AndroidConfig.builder()
+                .setPriority(com.google.firebase.messaging.AndroidConfig.Priority.HIGH)
+                .setNotification(
+                    com.google.firebase.messaging.AndroidNotification.builder()
+                        .setChannelId("agroflow_tasks_channel_v2")
+                        .setPriority(com.google.firebase.messaging.AndroidNotification.Priority.MAX)
+                        .setSound("default")
+                        .setDefaultVibrateTimings(true)
+                        .build()
+                )
+                .build()
+
             val message = Message.builder()
                 .setToken(token)
                 .setNotification(notification)
+                .putData("title", title)
+                .putData("body", body)
+                .setAndroidConfig(androidConfig)
                 .build()
 
             val response = FirebaseMessaging.getInstance().send(message)
             println("Notificacion enviada correctamente: $response")
         } catch (e: Exception) {
-            println("Error enviando notificacion: $e")
-            throw e
+            println("Error enviando notificacion: ${e.message}")
+            e.printStackTrace()
         }
     }
 }
