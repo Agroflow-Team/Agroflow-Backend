@@ -36,4 +36,12 @@ class AuthService(
             "rolId" to userEntity.rolId.toString()
         )
     }
+
+    fun updateFcmToken(usuarioId: String, fcmToken: String) {
+        val uuid = java.util.UUID.fromString(usuarioId)
+        val userEntity = usuarioRepository.findById(uuid)
+            .orElseThrow { RuntimeException("User not found") }
+        userEntity.fcmToken = fcmToken
+        usuarioRepository.save(userEntity)
+    }
 }
