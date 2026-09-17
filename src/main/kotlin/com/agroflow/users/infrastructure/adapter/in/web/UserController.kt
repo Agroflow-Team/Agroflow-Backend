@@ -90,7 +90,8 @@ class UserController(
 data class ClienteCreateRequest(
     val email: String,
     val password: String,
-    val name: String
+    val name: String,
+    val requestedRole: String? = null
 )
 
 data class AdminCreateUserRequest(

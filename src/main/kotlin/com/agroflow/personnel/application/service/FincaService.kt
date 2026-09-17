@@ -24,12 +24,14 @@ class FincaService(
     }
 
     override fun deleteFinca(id: UUID) {
-        val hasTrabajadores = trabajadorRepository.findByFincaId(id).isNotEmpty()
-        val hasInventory = inventoryRepository.findByFincaId(id).isNotEmpty()
-
-        if (hasTrabajadores || hasInventory) {
-            throw IllegalStateException("No se puede eliminar la finca porque tiene trabajadores o inventario asociado.")
-        }
+    // El usuario confirmó la eliminación, procedemos a borrar.
+    // Dependiendo de la base de datos, esto fallará si no hay ON DELETE CASCADE.
+    // Para asegurar que borra, borraremos los dependientes directos (trabajadores e inventario).
+        val trabajadores = trabajadorRepository.findByFincaId(id)
+        trabajadores.forEach { trabajadorRepository.deleteById(it.id!!) }
+        
+        val inventario = inventoryRepository.findByFincaId(id)
+        inventario.forEach { inventoryRepository.deleteById(it.id!!) }
 
         fincaRepository.deleteById(id)
     }

@@ -25,12 +25,17 @@ class FinanzasController(
 
     @PostMapping("")
     fun registrarTransaccion(@RequestBody request: TransaccionRequest): ResponseEntity<Transaccion> {
+        val fecha = try {
+            request.fechaTransaccion?.let { LocalDateTime.parse(it) } ?: LocalDateTime.now()
+        } catch (e: Exception) {
+            LocalDateTime.now()
+        }
         val transaccion = Transaccion(
             fincaId = request.fincaId,
             tipoMovimiento = request.tipoMovimiento,
             categoria = request.categoria,
             montoTotal = request.montoTotal,
-            fechaTransaccion = request.fechaTransaccion ?: LocalDateTime.now(),
+            fechaTransaccion = fecha,
             estadoSincronizacion = "SINCRONIZADO"
         )
         val created = manageFinanzasUseCase.registrarTransaccion(transaccion)
@@ -43,5 +48,5 @@ data class TransaccionRequest(
     val tipoMovimiento: TransaccionTipo,
     val categoria: String,
     val montoTotal: BigDecimal,
-    val fechaTransaccion: LocalDateTime? = null
+    val fechaTransaccion: String? = null
 )
