@@ -18,6 +18,9 @@ class UserManagementService(
     private val passwordEncoder: PasswordEncoder
 ) {
     fun createCliente(correo: String, clave: String, name: String): UsuarioEntity {
+        if (usuarioRepository.findByCorreo(correo).isPresent) {
+            throw IllegalArgumentException("El correo ya está en uso")
+        }
         val encodedPassword = passwordEncoder.encode(clave) ?: ""
         val usuario = UsuarioEntity(
             id = UUID.randomUUID(),
@@ -25,7 +28,8 @@ class UserManagementService(
             correo = correo,
             claveHash = encodedPassword,
             estado = "ACTIVO",
-            fechaCreacion = LocalDateTime.now()
+            fechaCreacion = LocalDateTime.now(),
+            nombre = name
         )
         return usuarioRepository.save(usuario)
     }
@@ -104,5 +108,9 @@ class UserManagementService(
         } else {
             throw IllegalArgumentException("User not found")
         }
+    }
+
+    fun getUserById(id: UUID): UsuarioEntity? {
+        return usuarioRepository.findById(id).orElse(null)
     }
 }

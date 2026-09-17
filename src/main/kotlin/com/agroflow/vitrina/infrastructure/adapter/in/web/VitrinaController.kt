@@ -28,62 +28,77 @@ class VitrinaController(
     }
 
     @PostMapping
-    fun crearPublicacion(@RequestBody request: CrearPublicacionRequest): ResponseEntity<Publicacion> {
-        val publicacion = Publicacion(
-            fincaId = request.fincaId,
-            tituloProducto = request.tituloProducto,
-            descripcion = request.descripcion,
-            precio = request.precio,
-            cantidadDisponible = request.cantidadDisponible,
-            imagenUrl = request.imagenUrl,
-            estadoPublicacion = request.estadoPublicacion ?: EstadoPublicacion.ACTIVA,
-            fechaCreacion = request.fechaCreacion ?: LocalDateTime.now(),
-            estadoSincronizacion = "SINCRONIZADO"
-        )
-        val created = manageVitrinaUseCase.crearPublicacion(publicacion)
-        return ResponseEntity.ok(created)
+    fun crearPublicacion(@RequestBody request: CrearPublicacionRequest): ResponseEntity<Any> {
+        return try {
+            val fincaIdUuid = request.fincaId?.let { UUID.fromString(it) }
+                ?: throw IllegalArgumentException("fincaId is required and must be a valid UUID")
+                
+            val publicacion = Publicacion(
+                fincaId = fincaIdUuid,
+                tituloProducto = request.tituloProducto ?: "",
+                descripcion = request.descripcion ?: "",
+                precio = request.precio ?: BigDecimal.ZERO,
+                cantidadDisponible = request.cantidadDisponible ?: 0,
+                imagenUrl = request.imagenUrl,
+                estadoPublicacion = request.estadoPublicacion ?: EstadoPublicacion.ACTIVA,
+                fechaCreacion = request.fechaCreacion ?: LocalDateTime.now(),
+                estadoSincronizacion = "SINCRONIZADO"
+            )
+            val created = manageVitrinaUseCase.crearPublicacion(publicacion)
+            ResponseEntity.ok(created)
+        } catch (e: Exception) {
+            ResponseEntity.badRequest().body(mapOf("error" to (e.message ?: "Invalid request data")))
+        }
     }
 
     @PutMapping("/{id}")
-    fun editarPublicacion(@PathVariable id: UUID, @RequestBody request: EditarPublicacionRequest): ResponseEntity<Publicacion> {
-        val publicacionUpdate = Publicacion(
-            id = id,
-            fincaId = request.fincaId, // assuming fincaId is required or pass existing
-            tituloProducto = request.tituloProducto,
-            descripcion = request.descripcion,
-            precio = request.precio,
-            cantidadDisponible = request.cantidadDisponible,
-            imagenUrl = request.imagenUrl,
-            estadoPublicacion = request.estadoPublicacion ?: EstadoPublicacion.ACTIVA,
-            fechaCreacion = LocalDateTime.now(), // not used in update
-            estadoSincronizacion = "SINCRONIZADO"
-        )
-        val updated = manageVitrinaUseCase.editarPublicacion(id, publicacionUpdate)
-        return ResponseEntity.ok(updated)
+    fun editarPublicacion(@PathVariable id: UUID, @RequestBody request: EditarPublicacionRequest): ResponseEntity<Any> {
+        return try {
+            val fincaIdUuid = request.fincaId?.let { UUID.fromString(it) }
+                ?: throw IllegalArgumentException("fincaId is required and must be a valid UUID")
+                
+            val publicacionUpdate = Publicacion(
+                id = id,
+                fincaId = fincaIdUuid,
+                tituloProducto = request.tituloProducto ?: "",
+                descripcion = request.descripcion ?: "",
+                precio = request.precio ?: BigDecimal.ZERO,
+                cantidadDisponible = request.cantidadDisponible ?: 0,
+                imagenUrl = request.imagenUrl,
+                estadoPublicacion = request.estadoPublicacion ?: EstadoPublicacion.ACTIVA,
+                fechaCreacion = LocalDateTime.now(),
+                estadoSincronizacion = "SINCRONIZADO"
+            )
+            val updated = manageVitrinaUseCase.editarPublicacion(id, publicacionUpdate)
+            ResponseEntity.ok(updated)
+        } catch (e: Exception) {
+            ResponseEntity.badRequest().body(mapOf("error" to (e.message ?: "Invalid request data")))
+        }
     }
 
     @PostMapping("/upload-image")
-    fun uploadImage(@RequestParam("file") file: org.springframework.web.multipart.MultipartFile): ResponseEntity<Map<String, String>> {
+    fun uploadImage(@RequestParam("file") file: org.springframework.web.multipart.MultipartFile): ResponseEntity<Any> {
         if (file.isEmpty) {
-            return ResponseEntity.badRequest().build()
+            return ResponseEntity.badRequest().body(mapOf("error" to "File is empty"))
         }
         try {
-            val uploadsDir = java.io.File("uploads")
+            val currentPath = System.getProperty("user.dir")
+            val uploadsDir = java.io.File(currentPath, "uploads")
             if (!uploadsDir.exists()) {
-                uploadsDir.mkdir()
+                uploadsDir.mkdirs()
             }
             val originalFilename = file.originalFilename ?: "image.jpg"
             val extension = originalFilename.substringAfterLast('.', "jpg")
             val newFilename = "${UUID.randomUUID()}.$extension"
             
             val destFile = java.io.File(uploadsDir, newFilename)
-            file.transferTo(destFile)
+            file.transferTo(destFile.absoluteFile)
             
-            // The image will be accessible at /uploads/{newFilename}
             val imageUrl = "/uploads/$newFilename"
             return ResponseEntity.ok(mapOf("url" to imageUrl))
         } catch (e: Exception) {
-            return ResponseEntity.internalServerError().build()
+            e.printStackTrace()
+            return ResponseEntity.internalServerError().body(mapOf("error" to (e.message ?: "Unknown error")))
         }
     }
 
@@ -101,22 +116,22 @@ class VitrinaController(
 }
 
 data class CrearPublicacionRequest(
-    val fincaId: UUID,
-    val tituloProducto: String,
-    val descripcion: String,
-    val precio: BigDecimal,
-    val cantidadDisponible: Int,
+    val fincaId: String?,
+    val tituloProducto: String?,
+    val descripcion: String?,
+    val precio: BigDecimal?,
+    val cantidadDisponible: Int?,
     val imagenUrl: String?,
     val estadoPublicacion: EstadoPublicacion? = null,
     val fechaCreacion: LocalDateTime? = null
 )
 
 data class EditarPublicacionRequest(
-    val fincaId: UUID,
-    val tituloProducto: String,
-    val descripcion: String,
-    val precio: BigDecimal,
-    val cantidadDisponible: Int,
+    val fincaId: String?,
+    val tituloProducto: String?,
+    val descripcion: String?,
+    val precio: BigDecimal?,
+    val cantidadDisponible: Int?,
     val imagenUrl: String?,
     val estadoPublicacion: EstadoPublicacion? = null
 )

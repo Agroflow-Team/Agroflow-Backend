@@ -6,4 +6,5 @@ import java.util.UUID
 
 interface SpringDataUsuarioRepository : JpaRepository<UsuarioEntity, UUID> {
     fun findByCorreo(correo: String): Optional<UsuarioEntity>
+    fun findByRolId(rolId: UUID): List<UsuarioEntity>
 }

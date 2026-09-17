@@ -18,6 +18,10 @@ class UsuarioRepositoryAdapter(
         return repository.findByCorreo(correo).map { it.id }
     }
 
+    override fun findByRolId(rolId: UUID): List<UsuarioEntity> {
+        return repository.findByRolId(rolId)
+    }
+
     override fun save(entity: UsuarioEntity): UsuarioEntity {
         return repository.save(entity)
     }

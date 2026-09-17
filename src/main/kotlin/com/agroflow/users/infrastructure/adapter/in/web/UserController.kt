@@ -18,8 +18,13 @@ class UserController(
 ) {
     @PostMapping("/cliente")
     fun createCliente(@RequestBody request: ClienteCreateRequest): ResponseEntity<Any> {
-        val user = userManagementService.createCliente(request.email, request.password, request.name)
-        return ResponseEntity.ok(mapOf("id" to user.id, "correo" to user.correo, "rolId" to user.rolId))
+        return try {
+            val user = userManagementService.createCliente(request.email, request.password, request.name)
+            ResponseEntity.ok(mapOf("id" to user.id, "correo" to user.correo, "rolId" to user.rolId))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mapOf("error" to (e.message ?: "Error al registrar cliente")))
+        }
     }
 
     @PostMapping("/admin/create")
@@ -48,6 +53,29 @@ class UserController(
             ResponseEntity.ok(mapOf("message" to "Perfil actualizado"))
         } catch (e: Exception) {
             ResponseEntity.status(HttpStatus.NOT_FOUND).body(mapOf("error" to e.message))
+        }
+    }
+
+    @GetMapping("/{id}")
+    fun getProfile(@PathVariable id: String): ResponseEntity<Any> {
+        return try {
+            val uuid = UUID.fromString(id)
+            val user = userManagementService.getUserById(uuid)
+            if (user != null) {
+                ResponseEntity.ok(mapOf(
+                    "id" to user.id,
+                    "correo" to user.correo,
+                    "rolId" to user.rolId,
+                    "nombre" to user.nombre,
+                    "telefono" to user.telefono,
+                    "direccion" to user.direccion,
+                    "fotoPerfilUrl" to user.fotoUrl
+                ))
+            } else {
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body(mapOf("error" to "Usuario no encontrado"))
+            }
+        } catch (e: Exception) {
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mapOf("error" to e.message))
         }
     }
 

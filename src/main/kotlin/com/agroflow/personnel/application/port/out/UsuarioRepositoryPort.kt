@@ -9,5 +9,6 @@ interface UsuarioRepositoryPort {
     fun findByCorreo(correo: String): Optional<Usuario>
     fun findIdByCorreo(correo: String): Optional<UUID>
     fun findById(id: UUID): Optional<UsuarioEntity>
+    fun findByRolId(rolId: UUID): List<UsuarioEntity>
     fun save(entity: UsuarioEntity): UsuarioEntity
 }
