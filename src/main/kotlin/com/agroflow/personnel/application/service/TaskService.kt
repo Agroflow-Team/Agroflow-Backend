@@ -16,15 +16,18 @@ class TaskService(
 ) : ManageTaskUseCase {
 
     override fun getTasksByWorker(trabajadorId: UUID): List<Task> {
-        val tasks = taskRepository.findByTrabajadorId(trabajadorId)
-        if (tasks.isNotEmpty()) return tasks
-
-        // Si no encontró tareas, puede que trabajadorId sea el usuarioId
-        val trabajador = trabajadorRepository.findAll().find { it.usuarioId == trabajadorId }
-        if (trabajador?.id != null) {
-            return taskRepository.findByTrabajadorId(trabajador.id!!)
+        val directTasks = taskRepository.findByTrabajadorId(trabajadorId)
+        val trabajador = trabajadorRepository.findById(trabajadorId)
+            ?: trabajadorRepository.findAll().find { it.usuarioId == trabajadorId }
+        
+        val altTasks = if (trabajador != null) {
+            val altId = if (trabajador.id == trabajadorId) trabajador.usuarioId else trabajador.id
+            if (altId != null) taskRepository.findByTrabajadorId(altId) else emptyList()
+        } else {
+            emptyList()
         }
-        return tasks
+        
+        return (directTasks + altTasks).distinctBy { it.id }
     }
 
     override fun getTasksByFinca(fincaId: UUID): List<Task> {

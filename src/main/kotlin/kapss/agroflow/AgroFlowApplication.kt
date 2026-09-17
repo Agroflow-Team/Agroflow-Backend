@@ -10,20 +10,17 @@ import com.agroflow.personnel.infrastructure.adapter.out.persistence.SpringDataU
 @SpringBootApplication
 class AgroFlowApplication {
     @Bean
-    fun fixCarlosPassword(usuarioRepository: SpringDataUsuarioRepository): CommandLineRunner {
+    fun cleanupDemoTables(jdbcTemplate: org.springframework.jdbc.core.JdbcTemplate): CommandLineRunner {
         return CommandLineRunner {
-            val user = usuarioRepository.findByCorreo("carlos.trabajador@agroflow.com")
-            if (user.isPresent) {
-                val entity = user.get()
-                val updated = com.agroflow.personnel.infrastructure.adapter.out.persistence.UsuarioEntity(
-                    id = entity.id,
-                    rolId = entity.rolId,
-                    correo = entity.correo,
-                    claveHash = "123",
-                    estado = entity.estado,
-                    fechaCreacion = entity.fechaCreacion
-                )
-                usuarioRepository.save(updated)
+            try {
+                jdbcTemplate.execute("DROP TABLE IF EXISTS demo_inventory CASCADE;")
+                jdbcTemplate.execute("DROP TABLE IF EXISTS demo_tasks CASCADE;")
+                jdbcTemplate.execute("DROP TABLE IF EXISTS demo_users CASCADE;")
+                jdbcTemplate.execute("DROP TABLE IF EXISTS demo_fincas CASCADE;")
+                jdbcTemplate.execute("DROP TABLE IF EXISTS demo_roles CASCADE;")
+                println(">>> TODAS LAS TABLAS DEMO FUERON ELIMINADAS CON EXITO DE SUPABASE <<<")
+            } catch (e: Exception) {
+                println(">>> Error limpiando tablas demo: ${e.message} <<<")
             }
         }
     }

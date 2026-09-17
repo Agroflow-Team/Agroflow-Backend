@@ -27,7 +27,13 @@ class TaskCreationService(
                 ?: trabajadorRepository.findAll().find { it.usuarioId == task.trabajadorId }
             
             val usuarioId = trabajador?.usuarioId ?: task.trabajadorId
-            val usuarioEntity = usuarioRepository.findById(usuarioId).orElse(null)
+            var usuarioEntity = usuarioRepository.findById(usuarioId).orElse(null)
+            
+            if (usuarioEntity == null && trabajador != null) {
+                usuarioEntity = usuarioRepository.findAll().find { 
+                    it.id == trabajador.usuarioId || it.correo.equals(trabajador.nombreCompleto, ignoreCase = true) 
+                }
+            }
             
             val token = usuarioEntity?.fcmToken
             println("TaskCreationService: Usuario destinatario: ${usuarioEntity?.correo ?: "No encontrado"}, Token FCM: ${if (token.isNullOrBlank()) "NO DISPONIBLE / VACIO" else "PRESENTE (${token.take(12)}...)"}")

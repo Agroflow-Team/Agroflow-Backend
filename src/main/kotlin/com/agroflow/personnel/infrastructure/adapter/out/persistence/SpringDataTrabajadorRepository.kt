@@ -5,4 +5,5 @@ import java.util.UUID
 
 interface SpringDataTrabajadorRepository : JpaRepository<TrabajadorEntity, UUID> {
     fun findByFincaId(fincaId: UUID): List<TrabajadorEntity>
+    fun findByUsuarioId(usuarioId: UUID): java.util.Optional<TrabajadorEntity>
 }

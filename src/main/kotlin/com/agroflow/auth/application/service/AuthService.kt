@@ -1,5 +1,6 @@
 package com.agroflow.auth.application.service
 
+import com.agroflow.personnel.infrastructure.adapter.out.persistence.SpringDataTrabajadorRepository
 import com.agroflow.personnel.infrastructure.adapter.out.persistence.SpringDataUsuarioRepository
 import com.agroflow.personnel.infrastructure.adapter.out.persistence.UsuarioEntity
 import com.agroflow.security.jwt.JwtUtils
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service
 @Service
 class AuthService(
     private val usuarioRepository: SpringDataUsuarioRepository,
+    private val trabajadorRepository: SpringDataTrabajadorRepository,
     private val passwordEncoder: PasswordEncoder,
     private val jwtUtils: JwtUtils
 ) {
@@ -29,12 +31,27 @@ class AuthService(
 
         val token = jwtUtils.generateToken(userEntity.id.toString(), userEntity.rolId.toString())
 
-        return mapOf(
+        val response = mutableMapOf(
             "token" to token,
             "usuarioId" to userEntity.id.toString(),
             "correo" to userEntity.correo,
             "rolId" to userEntity.rolId.toString()
         )
+
+        // Si es un trabajador, adjuntamos su fincaId y su ID de trabajador
+        val userIdVal = userEntity.id
+        if (userIdVal != null) {
+            val trabajador = trabajadorRepository.findByUsuarioId(userIdVal)
+            if (trabajador.isPresent) {
+                val t = trabajador.get()
+                response["fincaId"] = t.fincaId.toString()
+                if (t.id != null) {
+                    response["trabajadorId"] = t.id.toString()
+                }
+            }
+        }
+
+        return response
     }
 
     fun updateFcmToken(usuarioId: String, fcmToken: String) {
