@@ -1,0 +1,147 @@
+2026-09-09T12:21:36.5045680Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-09-09T12:21:40.1845453Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-09-09T12:21:40.2046408Z Container start method called.
+2026-09-09T12:21:40.2355500Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/azure-app-service/java:17.0.17-r260110 for agroflow-backend-sena., DetailsLevel: INFO
+2026-09-09T12:21:40.2532401Z Establishing network.
+2026-09-09T12:21:40.2537361Z Pulling image: azure-app-service/java:17.0.17-r260110.
+2026-09-09T12:22:20.6447639Z Image azure-app-service/java:17.0.17-r260110 is pulled from registry 10.1.0.6:13209
+2026-09-09T12:22:20.8222930Z Container is starting.
+2026-09-09T12:22:20.9179941Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for agroflow-backend-sena., DetailsLevel: INFO
+2026-09-09T12:22:20.9183081Z Establishing user namespace if not established already.
+2026-09-09T12:22:20.9184208Z Establishing network if not established already.
+2026-09-09T12:22:20.9186898Z Mounting volumes.
+2026-09-09T12:22:21.0546485Z Nested mountpoint 
+2026-09-09T12:22:21.6847541Z Nested mountpoint volatile/logs
+2026-09-09T12:22:21.7610889Z Nested mountpoint 
+2026-09-09T12:22:21.7814254Z Nested mountpoint 
+2026-09-09T12:22:21.9836886Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for agroflow-backend-sena. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-09-09T12:22:21.9838699Z Creating container.
+2026-09-09T12:22:21.9845286Z Creating pipes for streaming container io.
+2026-09-09T12:22:22.0118081Z Creating stdout named pipe at /podr/container/pipe/00f8b3f4c171_agroflow-backend-sena/stdout_bb52633e074141dc85d883eefa7cbe1a.
+2026-09-09T12:22:22.0435055Z Successfully created stdout named pipe at: /podr/container/pipe/00f8b3f4c171_agroflow-backend-sena/stdout_bb52633e074141dc85d883eefa7cbe1a.
+2026-09-09T12:22:22.0910013Z Opening named pipe /podr/container/pipe/00f8b3f4c171_agroflow-backend-sena/stdout_bb52633e074141dc85d883eefa7cbe1a for reading in non-blocking mode.
+2026-09-09T12:22:22.0913042Z Successfully opened named pipe: /podr/container/pipe/00f8b3f4c171_agroflow-backend-sena/stdout_bb52633e074141dc85d883eefa7cbe1a.
+2026-09-09T12:22:22.1003269Z Successfully removed non-blocking flag from /podr/container/pipe/00f8b3f4c171_agroflow-backend-sena/stdout_bb52633e074141dc85d883eefa7cbe1a.
+2026-09-09T12:22:22.1024882Z Creating stderr named pipe at /podr/container/pipe/00f8b3f4c171_agroflow-backend-sena/stderr_f690760e79b448eba3edbbde66fa83af.
+2026-09-09T12:22:22.1114093Z Successfully created stderr named pipe at: /podr/container/pipe/00f8b3f4c171_agroflow-backend-sena/stderr_f690760e79b448eba3edbbde66fa83af.
+2026-09-09T12:22:22.1205348Z Opening named pipe /podr/container/pipe/00f8b3f4c171_agroflow-backend-sena/stderr_f690760e79b448eba3edbbde66fa83af for reading in non-blocking mode.
+2026-09-09T12:22:22.1210765Z Successfully opened named pipe: /podr/container/pipe/00f8b3f4c171_agroflow-backend-sena/stderr_f690760e79b448eba3edbbde66fa83af.
+2026-09-09T12:22:22.1211598Z Successfully removed non-blocking flag from /podr/container/pipe/00f8b3f4c171_agroflow-backend-sena/stderr_f690760e79b448eba3edbbde66fa83af.
+2026-09-09T12:22:22.1860155Z Creating container with image: azure-app-service/java:17.0.17-r260110 from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/azure-app-service/java:17.0.17-r260110
+2026-09-09T12:22:29.0057531Z Starting container: 00f8b3f4c171_agroflow-backend-sena.
+2026-09-09T12:22:30.2881180Z Starting watchers and probes.
+2026-09-09T12:22:30.6276859Z Starting metrics collection.
+2026-09-09T12:22:30.8167858Z Container is running.
+2026-09-09T12:22:30.8175870Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container agroflow-backend-sena successfully created and is running., DetailsLevel: INFO
+2026-09-09T12:22:32.0967517Z Container start method finished after 51891 ms.
+2026-09-09T12:22:32.1250067Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container agroflow-backend-sena successfully created and is running., DetailsLevel: INFO
+2026-09-09T12:22:32.2044728Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-09-09T12:22:42.7859085Z Site startup probe succeeded after 10.277709 seconds.
+2026-09-09T12:22:43.3786475Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 10.277709 seconds., DetailsLevel: INFO
+2026-09-09T12:22:44.5138644Z Site started.
+2026-09-09T12:22:44.5207537Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 09/09/2026 12:22:44 (UTC), DetailsLevel: INFO
+2026-09-09T12:22:44.8463670Z Site is running with patch version JAVA-17.0.17
+2026-09-09T12:26:40.4160886Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-09-09T12:26:44.8784058Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-09-09T12:26:44.8790683Z Container start method called.
+2026-09-09T12:26:44.8791851Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/azure-app-service/java:17.0.17-r260110 for agroflow-backend-sena., DetailsLevel: INFO
+2026-09-09T12:26:44.8792746Z Establishing network.
+2026-09-09T12:26:44.8793434Z Pulling image: azure-app-service/java:17.0.17-r260110.
+2026-09-09T12:26:45.3824406Z Container is starting.
+2026-09-09T12:26:45.3830380Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for agroflow-backend-sena., DetailsLevel: INFO
+2026-09-09T12:26:45.3831817Z Establishing user namespace if not established already.
+2026-09-09T12:26:45.3833993Z Establishing network if not established already.
+2026-09-09T12:26:45.3835027Z Mounting volumes.
+2026-09-09T12:26:45.3841733Z Nested mountpoint 
+2026-09-09T12:26:45.4011440Z Nested mountpoint volatile/logs
+2026-09-09T12:26:45.4739879Z Nested mountpoint 
+2026-09-09T12:26:45.5613562Z Nested mountpoint 
+2026-09-09T12:26:45.5626391Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for agroflow-backend-sena. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-09-09T12:26:45.5626930Z Creating container.
+2026-09-09T12:26:45.5627307Z Creating pipes for streaming container io.
+2026-09-09T12:26:45.5627760Z Creating stdout named pipe at /podr/container/pipe/928046e04437_agroflow-backend-sena/stdout_485d09f585d444528690c0f7da071362.
+2026-09-09T12:26:45.5628764Z Successfully created stdout named pipe at: /podr/container/pipe/928046e04437_agroflow-backend-sena/stdout_485d09f585d444528690c0f7da071362.
+2026-09-09T12:26:45.5629106Z Opening named pipe /podr/container/pipe/928046e04437_agroflow-backend-sena/stdout_485d09f585d444528690c0f7da071362 for reading in non-blocking mode.
+2026-09-09T12:26:45.5629603Z Successfully opened named pipe: /podr/container/pipe/928046e04437_agroflow-backend-sena/stdout_485d09f585d444528690c0f7da071362.
+2026-09-09T12:26:45.5629958Z Successfully removed non-blocking flag from /podr/container/pipe/928046e04437_agroflow-backend-sena/stdout_485d09f585d444528690c0f7da071362.
+2026-09-09T12:26:45.5731298Z Creating stderr named pipe at /podr/container/pipe/928046e04437_agroflow-backend-sena/stderr_d0a20528cf1242ee9d6d38729108a877.
+2026-09-09T12:26:45.5732617Z Successfully created stderr named pipe at: /podr/container/pipe/928046e04437_agroflow-backend-sena/stderr_d0a20528cf1242ee9d6d38729108a877.
+2026-09-09T12:26:45.5733043Z Opening named pipe /podr/container/pipe/928046e04437_agroflow-backend-sena/stderr_d0a20528cf1242ee9d6d38729108a877 for reading in non-blocking mode.
+2026-09-09T12:26:45.5733620Z Successfully opened named pipe: /podr/container/pipe/928046e04437_agroflow-backend-sena/stderr_d0a20528cf1242ee9d6d38729108a877.
+2026-09-09T12:26:45.5733999Z Successfully removed non-blocking flag from /podr/container/pipe/928046e04437_agroflow-backend-sena/stderr_d0a20528cf1242ee9d6d38729108a877.
+2026-09-09T12:26:45.5825632Z Creating container with image: azure-app-service/java:17.0.17-r260110 from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/azure-app-service/java:17.0.17-r260110
+2026-09-09T12:26:46.3247737Z Starting container: 928046e04437_agroflow-backend-sena.
+2026-09-09T12:26:46.4866651Z Starting watchers and probes.
+2026-09-09T12:26:46.4952959Z Starting metrics collection.
+2026-09-09T12:26:46.4958629Z Container is running.
+2026-09-09T12:26:46.5049492Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container agroflow-backend-sena successfully created and is running., DetailsLevel: INFO
+2026-09-09T12:26:46.8234797Z Container start method finished after 1943 ms.
+2026-09-09T12:26:46.8833113Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container agroflow-backend-sena successfully created and is running., DetailsLevel: INFO
+2026-09-09T12:26:46.8840028Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-09-09T12:29:58.4681870Z Site startup probe succeeded after 191.5378904 seconds.
+2026-09-09T12:29:58.9085713Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 191.5378904 seconds., DetailsLevel: INFO
+2026-09-09T12:30:00.7056656Z Site is running with deployment version: 34905fae-fdd7-4504-81a1-111fd6de1b0e
+2026-09-09T12:30:00.7069712Z Site started.
+2026-09-09T12:30:00.7071015Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 09/09/2026 12:30:00 (UTC), DetailsLevel: INFO
+2026-09-09T12:30:00.7078290Z Site is running with patch version JAVA-17.0.17
+2026-09-09T12:30:21.4329584Z State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 09/09/2026 12:22:44 (UTC), DetailsLevel: INFO
+2026-09-09T12:30:21.5471143Z State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 09/09/2026 12:22:44 (UTC), DetailsLevel: INFO
+2026-09-09T12:30:21.5950404Z Container is terminating. Grace period: 5 seconds.
+2026-09-09T12:30:21.8582019Z Stop and delete container. Retry count = 0
+2026-09-09T12:30:21.8869327Z Stopping container: 00f8b3f4c171_agroflow-backend-sena.
+2026-09-09T12:30:23.5036555Z Deleting container: 00f8b3f4c171_agroflow-backend-sena. Retry count = 0
+2026-09-09T12:30:24.0642012Z Container spec TerminationMessagePolicy  path 
+2026-09-09T12:30:24.0936354Z Container is terminated. Total time elapsed: 2472 ms.
+2026-09-09T12:30:24.1224828Z Site: agroflow-backend-sena stopped.
+2026-09-09T15:13:55.2841968Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-09-09T15:13:58.4165154Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-09-09T15:13:58.4190296Z Container start method called.
+2026-09-09T15:13:58.4193592Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/azure-app-service/java:17.0.17-r260110 for agroflow-backend-sena., DetailsLevel: INFO
+2026-09-09T15:13:58.4462913Z Establishing network.
+2026-09-09T15:13:58.4477615Z Pulling image: azure-app-service/java:17.0.17-r260110.
+2026-09-09T15:13:59.0473588Z Container is starting.
+2026-09-09T15:13:59.0541056Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for agroflow-backend-sena., DetailsLevel: INFO
+2026-09-09T15:13:59.0543465Z Establishing user namespace if not established already.
+2026-09-09T15:13:59.0544042Z Establishing network if not established already.
+2026-09-09T15:13:59.0544641Z Mounting volumes.
+2026-09-09T15:13:59.0656892Z Nested mountpoint 
+2026-09-09T15:13:59.1342390Z Nested mountpoint volatile/logs
+2026-09-09T15:13:59.1801240Z Nested mountpoint 
+2026-09-09T15:13:59.1915594Z Nested mountpoint 
+2026-09-09T15:13:59.2593772Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for agroflow-backend-sena. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-09-09T15:13:59.2600443Z Creating container.
+2026-09-09T15:13:59.2608771Z Creating pipes for streaming container io.
+2026-09-09T15:13:59.2609936Z Creating stdout named pipe at /podr/container/pipe/69a69f2787b4_agroflow-backend-sena/stdout_99b7a10a992e42cb8b11040574ca5bd8.
+2026-09-09T15:13:59.3195557Z Successfully created stdout named pipe at: /podr/container/pipe/69a69f2787b4_agroflow-backend-sena/stdout_99b7a10a992e42cb8b11040574ca5bd8.
+2026-09-09T15:13:59.3196240Z Opening named pipe /podr/container/pipe/69a69f2787b4_agroflow-backend-sena/stdout_99b7a10a992e42cb8b11040574ca5bd8 for reading in non-blocking mode.
+2026-09-09T15:13:59.3196851Z Successfully opened named pipe: /podr/container/pipe/69a69f2787b4_agroflow-backend-sena/stdout_99b7a10a992e42cb8b11040574ca5bd8.
+2026-09-09T15:13:59.3197303Z Successfully removed non-blocking flag from /podr/container/pipe/69a69f2787b4_agroflow-backend-sena/stdout_99b7a10a992e42cb8b11040574ca5bd8.
+2026-09-09T15:13:59.3582401Z Creating stderr named pipe at /podr/container/pipe/69a69f2787b4_agroflow-backend-sena/stderr_e15c77b9ebf74abc8d94ffc85baa1e05.
+2026-09-09T15:13:59.3588664Z Successfully created stderr named pipe at: /podr/container/pipe/69a69f2787b4_agroflow-backend-sena/stderr_e15c77b9ebf74abc8d94ffc85baa1e05.
+2026-09-09T15:13:59.3592985Z Opening named pipe /podr/container/pipe/69a69f2787b4_agroflow-backend-sena/stderr_e15c77b9ebf74abc8d94ffc85baa1e05 for reading in non-blocking mode.
+2026-09-09T15:13:59.3771860Z Successfully opened named pipe: /podr/container/pipe/69a69f2787b4_agroflow-backend-sena/stderr_e15c77b9ebf74abc8d94ffc85baa1e05.
+2026-09-09T15:13:59.3988209Z Successfully removed non-blocking flag from /podr/container/pipe/69a69f2787b4_agroflow-backend-sena/stderr_e15c77b9ebf74abc8d94ffc85baa1e05.
+2026-09-09T15:13:59.4191393Z Creating container with image: azure-app-service/java:17.0.17-r260110 from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/azure-app-service/java:17.0.17-r260110
+2026-09-09T15:14:00.4248706Z Starting container: 69a69f2787b4_agroflow-backend-sena.
+2026-09-09T15:14:00.6072037Z Starting watchers and probes.
+2026-09-09T15:14:00.6256651Z Starting metrics collection.
+2026-09-09T15:14:00.6542463Z Container is running.
+2026-09-09T15:14:00.6545101Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container agroflow-backend-sena successfully created and is running., DetailsLevel: INFO
+2026-09-09T15:14:00.9921207Z Container start method finished after 2572 ms.
+2026-09-09T15:14:00.9923723Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container agroflow-backend-sena successfully created and is running., DetailsLevel: INFO
+2026-09-09T15:14:00.9926486Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-09-09T15:16:45.7652962Z Site startup probe succeeded after 164.6630911 seconds.
+2026-09-09T15:16:46.0726022Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 164.6630911 seconds., DetailsLevel: INFO
+2026-09-09T15:16:47.4580495Z Site is running with deployment version: 04829400-9522-4947-9044-8177fdd6389e
+2026-09-09T15:16:47.4959814Z Site started.
+2026-09-09T15:16:47.5036571Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 09/09/2026 15:16:47 (UTC), DetailsLevel: INFO
+2026-09-09T15:16:47.5065978Z Site is running with patch version JAVA-17.0.17
+2026-09-09T15:17:08.2207484Z State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 09/09/2026 12:30:00 (UTC), DetailsLevel: INFO
+2026-09-09T15:17:08.2272047Z State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 09/09/2026 12:30:00 (UTC), DetailsLevel: INFO
+2026-09-09T15:17:08.2283867Z Container is terminating. Grace period: 5 seconds.
+2026-09-09T15:17:08.6753368Z Stop and delete container. Retry count = 0
+2026-09-09T15:17:08.6852327Z Stopping container: 928046e04437_agroflow-backend-sena.
+2026-09-09T15:17:10.0298464Z Deleting container: 928046e04437_agroflow-backend-sena. Retry count = 0
+2026-09-09T15:17:10.4636353Z Container spec TerminationMessagePolicy  path 
+2026-09-09T15:17:10.4649550Z Container is terminated. Total time elapsed: 2235 ms.
+2026-09-09T15:17:10.4926983Z Site: agroflow-backend-sena stopped.

@@ -1,0 +1,5 @@
+<step title="Incoming Request" date="2026-09-18T12:07:41.837" instance="7f81f8" url="/logstream" method="GET" type="request" pid="838,1,75" Host="agroflow-backend-sena.scm.azurewebsites.net" User-Agent="AZURECLI/2.90.0 (MSI)" Accept-Encoding="identity" Authorization="Bea..." x-ms-client-request-id="87a8692a-b359-11f1-8ddc-8f4e584981e8" X-ARR-LOG-ID="87a8692a-b359-11f1-8ddc-8f4e584981e8" CLIENT-IP="179.1.217.145:47813" X-SITE-DEPLOYMENT-ID="agroflow-backend-sena" WAS-DEFAULT-HOSTNAME="agroflow-backend-sena.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/logstream" X-Client-IP="179.1.217.145" X-Client-Port="47813" >
+  <step title="LogStreamHandlerMiddleware.Invoke" date="2026-09-18T12:07:41.855" /><!-- duration: 2635ms -->
+  <step title="Error occurred" date="2026-09-18T12:48:44.620" type="error" text="LogStreamManager: ProcessRequest end" /><!-- duration: 3ms -->
+  <step title="Outgoing response" date="2026-09-18T12:48:44.654" type="response" statusCode="200" statusText="OK" /><!-- duration: 5ms -->
+</step><!-- duration: 2462824ms -->

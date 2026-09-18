@@ -13,13 +13,8 @@ class FirebaseConfig {
     @PostConstruct
     fun initialize() {
         try {
-            val envCredentialsRaw = System.getenv("FIREBASE_CREDENTIALS")
-            val credentialsStream = if (!envCredentialsRaw.isNullOrBlank()) {
-                // Azure CLI y otros entornos a veces escapan los saltos de línea (\n)
-                // como un backslash literal seguido de una 'n' (\\n).
-                // Firebase Admin necesita que los saltos de línea sean reales.
-                val envCredentials = envCredentialsRaw.replace("\\n", "\n")
-                
+            val envCredentials = System.getenv("FIREBASE_CREDENTIALS")
+            val credentialsStream = if (!envCredentials.isNullOrBlank()) {
                 println("[FirebaseConfig] Cargando Firebase desde Variable de Entorno (FIREBASE_CREDENTIALS) - ${envCredentials.length} caracteres")
                 ByteArrayInputStream(envCredentials.toByteArray(Charsets.UTF_8))
             } else {

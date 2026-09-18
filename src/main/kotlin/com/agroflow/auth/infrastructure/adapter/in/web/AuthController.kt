@@ -38,6 +38,17 @@ class AuthController(
             ResponseEntity.status(400).body(mapOf("error" to (e.message ?: "Bad Request")))
         }
     }
+
+    @org.springframework.web.bind.annotation.GetMapping("/test-firebase")
+    fun checkFirebase(): ResponseEntity<Map<String, Any>> {
+        val apps = com.google.firebase.FirebaseApp.getApps()
+        val hasEnv = !System.getenv("FIREBASE_CREDENTIALS").isNullOrBlank()
+        return ResponseEntity.ok(mapOf(
+            "firebaseConfigured" to apps.isNotEmpty(),
+            "hasEnvVar" to hasEnv,
+            "apps" to apps.map { it.name }
+        ))
+    }
 }
 
 data class UpdateFcmTokenRequest(

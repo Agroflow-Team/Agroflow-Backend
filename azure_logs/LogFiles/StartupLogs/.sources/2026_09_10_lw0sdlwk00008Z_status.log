@@ -1,0 +1,9 @@
+2026-09-10T16:12:07.7593572Z State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 09/09/2026 15:16:47 (UTC), DetailsLevel: INFO
+2026-09-10T16:12:07.7700878Z State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 09/09/2026 15:16:47 (UTC), DetailsLevel: INFO
+2026-09-10T16:12:07.7802469Z Container is terminating. Grace period: 5 seconds.
+2026-09-10T16:12:07.8685259Z Stop and delete container. Retry count = 0
+2026-09-10T16:12:07.8701679Z Stopping container: 69a69f2787b4_agroflow-backend-sena.
+2026-09-10T16:12:10.6403299Z Deleting container: 69a69f2787b4_agroflow-backend-sena. Retry count = 0
+2026-09-10T16:12:11.2923569Z Container spec TerminationMessagePolicy  path 
+2026-09-10T16:12:11.2940998Z Container is terminated. Total time elapsed: 3504 ms.
+2026-09-10T16:12:11.2948138Z Site: agroflow-backend-sena stopped.

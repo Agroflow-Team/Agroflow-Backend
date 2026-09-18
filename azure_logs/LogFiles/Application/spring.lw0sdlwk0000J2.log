@@ -1,0 +1,135 @@
+2026-09-18T11:35:51.020Z  WARN 71 --- [http-nio-80-exec-5] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2026-09-18T11:37:09.038Z  WARN 71 --- [http-nio-80-exec-2] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2026-09-18T11:42:19.439Z  INFO 71 --- [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-09-18T11:42:19.699Z  INFO 71 --- [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-09-18T11:42:20.241Z  INFO 71 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-18T11:42:20.999Z  INFO 71 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+ring Data repository scanning in 1138 ms. Found 8 JPA repository interfaces.
+2026-09-18T11:40:37.733Z  INFO 70 --- [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 80 (http)
+2026-09-18T11:40:39.131Z  INFO 70 --- [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 37776 ms
+2026-09-18T11:40:45.576Z  INFO 70 --- [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-09-18T11:40:46.976Z  INFO 70 --- [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-09-18T11:40:55.014Z  INFO 70 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-18T11:40:55.459Z  INFO 70 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-18T11:41:01.146Z  INFO 70 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2686a801
+2026-09-18T11:41:01.177Z  INFO 70 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-18T11:41:01.731Z  WARN 70 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-18T11:41:03.017Z  INFO 70 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://aws-0-us-west-2.pooler.supabase.com:6543/postgres?prepareThreshold=0]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.6
+	Default catalog/schema: postgres/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-09-18T11:41:19.674Z  INFO 70 --- [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-18T11:41:20.851Z  INFO 70 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-18T11:41:22.070Z  INFO 70 --- [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-09-18T11:41:36.384Z  WARN 70 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-18T11:41:38.126Z  WARN 70 --- [main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 42e84c90-642a-47f4-b85e-a1959174fbd0
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-09-18T11:41:38.414Z  INFO 70 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-09-18T11:41:46.382Z  INFO 70 --- [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 80 (http) with context path '/'
+2026-09-18T11:41:46.773Z  INFO 70 --- [main] com.agroflow.AgroFlowApplicationKt       : Started AgroFlowApplicationKt in 114.26 seconds (process running for 124.748)
+2026-09-18T11:41:48.325Z  INFO 70 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-18T11:41:48.378Z  INFO 70 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 43 ms
+2026-09-18T11:43:42.262Z  WARN 70 --- [http-nio-80-exec-5] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2026-09-18T11:45:36.509Z  WARN 70 --- [http-nio-80-exec-9] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2026-09-18T11:49:38.477Z  WARN 70 --- [http-nio-80-exec-7] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2026-09-18T11:51:52.437Z  WARN 70 --- [http-nio-80-exec-8] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2026-09-18T11:53:36.026Z  WARN 70 --- [http-nio-80-exec-1] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2026-09-18T11:56:59.237Z  WARN 70 --- [http-nio-80-exec-3] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2026-09-18T12:03:58.948Z  WARN 70 --- [http-nio-80-exec-8] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2026-09-18T12:13:15.541Z  INFO 70 --- [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-09-18T12:13:15.616Z  INFO 70 --- [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-09-18T12:13:15.693Z  INFO 70 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-18T12:13:15.756Z  INFO 70 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-09-18T12:13:16.948Z  INFO 70 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+erver          : Tomcat initialized with port 80 (http)
+2026-09-18T12:11:15.446Z  INFO 69 --- [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 30372 ms
+2026-09-18T12:11:22.239Z  INFO 69 --- [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-09-18T12:11:23.294Z  INFO 69 --- [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-09-18T12:11:32.908Z  INFO 69 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-18T12:11:33.908Z  INFO 69 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-18T12:11:40.098Z  INFO 69 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2686a801
+2026-09-18T12:11:40.110Z  INFO 69 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-18T12:11:41.065Z  WARN 69 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-18T12:11:42.149Z  INFO 69 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://aws-0-us-west-2.pooler.supabase.com:6543/postgres?prepareThreshold=0]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.6
+	Default catalog/schema: postgres/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-09-18T12:12:01.148Z  INFO 69 --- [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-18T12:12:03.100Z  INFO 69 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-18T12:12:06.316Z  INFO 69 --- [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-09-18T12:12:37.098Z  WARN 69 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-18T12:12:38.427Z  WARN 69 --- [main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 83c4f50f-0cae-4569-bb89-adefaf09882b
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-09-18T12:12:38.600Z  INFO 69 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-09-18T12:12:46.643Z  INFO 69 --- [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 80 (http) with context path '/'
+2026-09-18T12:12:47.101Z  INFO 69 --- [main] com.agroflow.AgroFlowApplicationKt       : Started AgroFlowApplicationKt in 138.47 seconds (process running for 149.989)
+2026-09-18T12:12:49.052Z  INFO 69 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-18T12:12:49.072Z  INFO 69 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2026-09-18T12:19:55.459Z  WARN 69 --- [http-nio-80-exec-1] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2026-09-18T12:22:03.665Z  WARN 69 --- [http-nio-80-exec-10] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2026-09-18T13:10:37.303Z  INFO 70 --- [main] com.agroflow.AgroFlowApplicationKt       : Starting AgroFlowApplicationKt v0.0.1-SNAPSHOT using Java 17.0.17 with PID 70 (/home/site/wwwroot/app.jar started by root in /home/site/wwwroot)
+2026-09-18T13:10:37.340Z  INFO 70 --- [main] com.agroflow.AgroFlowApplicationKt       : No active profile set, falling back to 1 default profile: "default"
+2026-09-18T13:10:54.382Z  INFO 70 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-18T13:10:55.408Z  INFO 70 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 863 ms. Found 8 JPA repository interfaces.
+2026-09-18T13:11:08.545Z  INFO 70 --- [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 80 (http)
+2026-09-18T13:11:09.706Z  INFO 70 --- [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 31416 ms
+2026-09-18T13:11:15.754Z  INFO 70 --- [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-09-18T13:11:16.949Z  INFO 70 --- [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-09-18T13:11:26.450Z  INFO 70 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-18T13:11:26.881Z  INFO 70 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-18T13:11:32.830Z  INFO 70 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2686a801
+2026-09-18T13:11:32.867Z  INFO 70 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-18T13:11:33.849Z  WARN 70 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-18T13:11:34.910Z  INFO 70 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://aws-0-us-west-2.pooler.supabase.com:6543/postgres?prepareThreshold=0]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.6
+	Default catalog/schema: postgres/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-09-18T13:11:53.241Z  INFO 70 --- [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-18T13:11:54.558Z  INFO 70 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-18T13:11:55.740Z  INFO 70 --- [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-09-18T13:12:15.608Z  WARN 70 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-18T13:12:18.448Z  WARN 70 --- [main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: fac4a25f-e2ba-48ed-810f-c9db710262ad
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-09-18T13:12:18.965Z  INFO 70 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-09-18T13:12:40.199Z  INFO 70 --- [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 80 (http) with context path '/'
+2026-09-18T13:12:40.499Z  INFO 70 --- [main] com.agroflow.AgroFlowApplicationKt       : Started AgroFlowApplicationKt in 136.372 seconds (process running for 146.416)
+2026-09-18T13:12:42.812Z  INFO 70 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-18T13:12:42.980Z  INFO 70 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2026-09-18T13:13:23.571Z  WARN 70 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@2686a801 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2026-09-18T13:53:17.255Z  WARN 70 --- [http-nio-80-exec-4] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt

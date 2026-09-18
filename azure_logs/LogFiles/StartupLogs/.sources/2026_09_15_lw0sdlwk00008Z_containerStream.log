@@ -1,0 +1,2 @@
+2026-09-15T01:21:11.5622576Z Hibernate: select ue1_0.id,ue1_0.clave_hash,ue1_0.correo,ue1_0.direccion,ue1_0.estado,ue1_0.fcm_token,ue1_0.fecha_creacion,ue1_0.foto_url,ue1_0.nombre,ue1_0.rol_id,ue1_0.telefono from usuarios ue1_0 where ue1_0.correo=?
+2026-09-15T01:21:13.7125178Z Hibernate: select ue1_0.id,ue1_0.clave_hash,ue1_0.correo,ue1_0.direccion,ue1_0.estado,ue1_0.fcm_token,ue1_0.fecha_creacion,ue1_0.foto_url,ue1_0.nombre,ue1_0.rol_id,ue1_0.telefono from usuarios ue1_0 where ue1_0.id=?
