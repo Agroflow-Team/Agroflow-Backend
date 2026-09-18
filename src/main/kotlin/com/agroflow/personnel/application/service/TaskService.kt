@@ -51,9 +51,12 @@ class TaskService(
             val trabajador = trabajadorRepository.findById(trabajadorId)
             
             if (trabajador != null) {
+                println("[TaskService] Trabajador encontrado: ${trabajador.nombreCompleto}. Buscando admins para notificar...")
                 // Notificar a todos los admins
                 val admins = usuarioRepository.findByRolId(com.agroflow.core.domain.Roles.ADMIN)
                 val tokens = admins.mapNotNull { it.fcmToken }.filter { it.isNotBlank() }
+                
+                println("[TaskService] Admins encontrados: ${admins.size}, con token FCM: ${tokens.size}")
                 
                 if (tokens.isNotEmpty()) {
                     val titulo = if (nuevoEstado == TaskStatus.COMPLETADA) {
@@ -71,10 +74,15 @@ class TaskService(
                     tokens.forEach { token ->
                         notificationService.sendPushNotification(token, titulo, cuerpo)
                     }
+                } else {
+                    System.err.println("[TaskService] WARN: No hay admins con token FCM registrado. Los admins deben iniciar sesión en la app.")
                 }
+            } else {
+                System.err.println("[TaskService] WARN: No se encontró trabajador con ID: $trabajadorId")
             }
         } catch (e: Exception) {
-            System.err.println("Error enviando notificacion de avance: \${e.message}")
+            System.err.println("[TaskService] Error enviando notificacion de avance: ${e.message}")
+            e.printStackTrace()
         }
 
         return savedTask

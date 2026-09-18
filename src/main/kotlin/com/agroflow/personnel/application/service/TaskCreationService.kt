@@ -27,14 +27,28 @@ class TaskCreationService(
             // 1. Intentar buscar por ID de perfil de trabajador
             val trabajador = trabajadorRepository.findById(task.trabajadorId)
             if (trabajador != null) {
+                println("[TaskCreationService] Perfil de trabajador encontrado: ${trabajador.nombreCompleto}, usuarioId: ${trabajador.usuarioId}")
                 val usuarioEntity = usuarioRepository.findById(trabajador.usuarioId).orElse(null)
-                token = usuarioEntity?.fcmToken
+                if (usuarioEntity != null) {
+                    token = usuarioEntity.fcmToken
+                    println("[TaskCreationService] Usuario encontrado: ${usuarioEntity.correo}, fcmToken: ${if (token.isNullOrBlank()) "VACÍO" else "${token.take(15)}..."}")
+                } else {
+                    println("[TaskCreationService] WARN: No se encontró usuario con ID: ${trabajador.usuarioId}")
+                }
+            } else {
+                println("[TaskCreationService] WARN: No se encontró perfil de trabajador con ID: ${task.trabajadorId}")
             }
             
             // 2. Si no se encontró el token, intentar buscar directamente como usuarioId
             if (token.isNullOrBlank()) {
+                println("[TaskCreationService] Intentando buscar directamente como usuarioId...")
                 val usuarioDirecto = usuarioRepository.findById(task.trabajadorId).orElse(null)
-                token = usuarioDirecto?.fcmToken
+                if (usuarioDirecto != null) {
+                    token = usuarioDirecto.fcmToken
+                    println("[TaskCreationService] Usuario directo encontrado: ${usuarioDirecto.correo}, fcmToken: ${if (token.isNullOrBlank()) "VACÍO" else "${token.take(15)}..."}")
+                } else {
+                    println("[TaskCreationService] WARN: Tampoco se encontró usuario directo con ID: ${task.trabajadorId}")
+                }
             }
             
             if (!token.isNullOrBlank()) {
@@ -45,10 +59,10 @@ class TaskCreationService(
                     body = "Tienes una nueva tarea: ${task.titulo}"
                 )
             } else {
-                println("[TaskCreationService] WARN: No se encontró token FCM para el trabajador ID: ${task.trabajadorId}")
+                System.err.println("[TaskCreationService] ERROR: No se encontró token FCM para el trabajador ID: ${task.trabajadorId}. El trabajador debe iniciar sesión en la app para registrar su token.")
             }
         } catch (e: Exception) {
-            println("[TaskCreationService] ERROR al procesar notificación: ${e.message}")
+            System.err.println("[TaskCreationService] ERROR al procesar notificación: ${e.message}")
             e.printStackTrace()
         }
         

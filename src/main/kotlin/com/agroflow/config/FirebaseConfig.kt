@@ -13,13 +13,24 @@ class FirebaseConfig {
     @PostConstruct
     fun initialize() {
         try {
-            val envCredentials = System.getenv("FIREBASE_CREDENTIALS")
-            val credentialsStream = if (!envCredentials.isNullOrBlank()) {
-                println("Cargando Firebase desde Variable de Entorno (FIREBASE_CREDENTIALS)")
+            val envCredentialsRaw = System.getenv("FIREBASE_CREDENTIALS")
+            val credentialsStream = if (!envCredentialsRaw.isNullOrBlank()) {
+                // Azure CLI y otros entornos a veces escapan los saltos de línea (\n)
+                // como un backslash literal seguido de una 'n' (\\n).
+                // Firebase Admin necesita que los saltos de línea sean reales.
+                val envCredentials = envCredentialsRaw.replace("\\n", "\n")
+                
+                println("[FirebaseConfig] Cargando Firebase desde Variable de Entorno (FIREBASE_CREDENTIALS) - ${envCredentials.length} caracteres")
                 ByteArrayInputStream(envCredentials.toByteArray(Charsets.UTF_8))
             } else {
-                println("Cargando Firebase desde archivo local firebase-admin.json")
-                javaClass.classLoader.getResourceAsStream("firebase-admin.json")
+                println("[FirebaseConfig] Variable FIREBASE_CREDENTIALS no encontrada. Intentando archivo local firebase-admin.json...")
+                val stream = javaClass.classLoader.getResourceAsStream("firebase-admin.json")
+                if (stream != null) {
+                    println("[FirebaseConfig] Archivo firebase-admin.json encontrado en resources.")
+                } else {
+                    System.err.println("[FirebaseConfig] ERROR: No se encontró firebase-admin.json en resources.")
+                }
+                stream
             }
 
             if (credentialsStream != null) {
@@ -29,11 +40,16 @@ class FirebaseConfig {
                 
                 if (FirebaseApp.getApps().isEmpty()) {
                     FirebaseApp.initializeApp(options)
+                    println("[FirebaseConfig] ✅ Firebase inicializado correctamente. Notificaciones push habilitadas.")
+                } else {
+                    println("[FirebaseConfig] Firebase ya estaba inicializado.")
                 }
             } else {
-                println("No se encontraron credenciales de Firebase. Notificaciones deshabilitadas.")
+                System.err.println("[FirebaseConfig] ERROR: No se encontraron credenciales de Firebase. Las notificaciones push NO funcionarán.")
+                System.err.println("[FirebaseConfig] Configura la variable de entorno FIREBASE_CREDENTIALS o coloca firebase-admin.json en src/main/resources/")
             }
         } catch (e: Exception) {
+            System.err.println("[FirebaseConfig] ERROR al inicializar Firebase: ${e.message}")
             e.printStackTrace()
         }
     }
