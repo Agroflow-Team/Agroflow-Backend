@@ -42,11 +42,26 @@ class AuthController(
     @org.springframework.web.bind.annotation.GetMapping("/test-firebase")
     fun checkFirebase(): ResponseEntity<Map<String, Any>> {
         val apps = com.google.firebase.FirebaseApp.getApps()
-        val hasEnv = !System.getenv("FIREBASE_CREDENTIALS").isNullOrBlank()
+        val envRaw = System.getenv("FIREBASE_CREDENTIALS")
+        var initError = "No intentado"
+        if (apps.isEmpty() && !envRaw.isNullOrBlank()) {
+            try {
+                val stream = java.io.ByteArrayInputStream(envRaw.toByteArray(Charsets.UTF_8))
+                val options = com.google.firebase.FirebaseOptions.builder()
+                    .setCredentials(com.google.auth.oauth2.GoogleCredentials.fromStream(stream))
+                    .build()
+                com.google.firebase.FirebaseApp.initializeApp(options)
+                initError = "Inicialización exitosa ahora mismo"
+            } catch (e: Exception) {
+                initError = e.message ?: "Excepción sin mensaje: ${e.javaClass.name}"
+            }
+        }
         return ResponseEntity.ok(mapOf(
-            "firebaseConfigured" to apps.isNotEmpty(),
-            "hasEnvVar" to hasEnv,
-            "apps" to apps.map { it.name }
+            "firebaseConfigured" to com.google.firebase.FirebaseApp.getApps().isNotEmpty(),
+            "hasEnvVar" to !envRaw.isNullOrBlank(),
+            "envVarLength" to (envRaw?.length ?: 0),
+            "initError" to initError,
+            "apps" to com.google.firebase.FirebaseApp.getApps().map { it.name }
         ))
     }
 }
