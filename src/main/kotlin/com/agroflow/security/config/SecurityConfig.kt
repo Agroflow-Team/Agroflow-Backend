@@ -28,11 +28,11 @@ class SecurityConfig(
             .csrf { it.disable() }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
-                it.requestMatchers("/api/auth/**").permitAll()
-                it.requestMatchers("/api/fincas/**").permitAll()
-                it.requestMatchers("/api/users/cliente").permitAll()
-                it.requestMatchers("/uploads/**").permitAll()
-                it.requestMatchers("/error").permitAll()
+                it.requestMatchers(org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher("/api/auth/**")).permitAll()
+                it.requestMatchers(org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher("/api/fincas/**")).permitAll()
+                it.requestMatchers(org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher("/api/users/cliente")).permitAll()
+                it.requestMatchers(org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher("/uploads/**")).permitAll()
+                it.requestMatchers(org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher("/error")).permitAll()
                 it.anyRequest().authenticated()
             }
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter::class.java)
