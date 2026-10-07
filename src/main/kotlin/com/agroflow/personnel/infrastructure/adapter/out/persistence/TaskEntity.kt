@@ -20,9 +20,6 @@ class TaskEntity(
     @Column(name = "trabajador_id")
     val trabajadorId: UUID,
 
-    @Column(name = "lote_id")
-    val loteId: UUID?,
-
     @Column(name = "titulo")
     var titulo: String,
 
@@ -56,7 +53,6 @@ class TaskEntity(
         id = id,
         fincaId = fincaId,
         trabajadorId = trabajadorId,
-        loteId = loteId,
         titulo = titulo,
         descripcion = descripcion,
         estado = estado,
@@ -73,7 +69,6 @@ class TaskEntity(
             id = task.id ?: UUID.randomUUID(),
             fincaId = task.fincaId,
             trabajadorId = task.trabajadorId,
-            loteId = task.loteId,
             titulo = task.titulo,
             descripcion = task.descripcion,
             estado = task.estado,

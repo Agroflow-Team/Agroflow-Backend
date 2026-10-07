@@ -34,10 +34,20 @@ class UserManagementService(
         return usuarioRepository.save(usuario)
     }
 
-    fun createAdminOrAgricultor(correo: String, clave: String, requestedRole: String): UsuarioEntity {
-        val rolId = when (requestedRole.uppercase()) {
-            "ADMIN" -> Roles.ADMIN
-            "AGRICULTOR" -> Roles.AGRICULTOR
+    fun createAdminOrAgricultor(correo: String, clave: String, requestedRole: String, nombre: String? = null): UsuarioEntity {
+        if (usuarioRepository.findByCorreo(correo).isPresent) {
+            throw IllegalArgumentException("El correo ya está en uso")
+        }
+
+        val roleUpper = requestedRole.uppercase()
+        val adminUuidStr = Roles.ADMIN.toString().uppercase()
+        val agricultorUuidStr = Roles.AGRICULTOR.toString().uppercase()
+        val clienteUuidStr = Roles.CLIENTE.toString().uppercase()
+
+        val rolId = when (roleUpper) {
+            "ADMIN", adminUuidStr -> Roles.ADMIN
+            "AGRICULTOR", agricultorUuidStr -> Roles.AGRICULTOR
+            "CLIENTE", clienteUuidStr -> Roles.CLIENTE
             else -> throw IllegalArgumentException("Role not allowed: $requestedRole")
         }
 
@@ -48,7 +58,8 @@ class UserManagementService(
             correo = correo,
             claveHash = encodedPassword,
             estado = "ACTIVO",
-            fechaCreacion = LocalDateTime.now()
+            fechaCreacion = LocalDateTime.now(),
+            nombre = nombre
         )
         return usuarioRepository.save(usuario)
     }

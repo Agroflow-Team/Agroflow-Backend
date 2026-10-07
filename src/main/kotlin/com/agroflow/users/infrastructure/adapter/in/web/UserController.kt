@@ -27,6 +27,18 @@ class UserController(
         }
     }
 
+    @PostMapping("/agricultor")
+    fun createAgricultor(@RequestBody request: ClienteCreateRequest): ResponseEntity<Any> {
+        return try {
+            val role = request.requestedRole ?: "AGRICULTOR"
+            val user = userManagementService.createAdminOrAgricultor(request.email, request.password, role, request.name)
+            ResponseEntity.ok(mapOf("id" to user.id, "correo" to user.correo, "rolId" to user.rolId))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mapOf("error" to (e.message ?: "Error al registrar agricultor")))
+        }
+    }
+
     @PostMapping("/admin/create")
     fun createAdmin(@RequestBody request: AdminCreateUserRequest, httpRequest: HttpServletRequest): ResponseEntity<Any> {
         val authHeader = httpRequest.getHeader("Authorization")
@@ -41,7 +53,8 @@ class UserController(
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(mapOf("error" to "Only ADMIN can perform this action"))
         }
 
-        val user = userManagementService.createAdminOrAgricultor(request.email, request.password, request.requestedRole)
+        val userName = request.name ?: request.nombre
+        val user = userManagementService.createAdminOrAgricultor(request.email, request.password, request.requestedRole, userName)
         return ResponseEntity.ok(mapOf("id" to user.id, "correo" to user.correo, "rolId" to user.rolId))
     }
 
@@ -97,7 +110,9 @@ data class ClienteCreateRequest(
 data class AdminCreateUserRequest(
     val email: String,
     val password: String,
-    val requestedRole: String
+    val requestedRole: String,
+    val name: String? = null,
+    val nombre: String? = null
 )
 
 data class AgricultorCreateUserRequest(

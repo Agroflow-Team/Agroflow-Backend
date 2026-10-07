@@ -22,7 +22,6 @@ class TaskController(
         val newTask = Task(
             fincaId = request.fincaId,
             trabajadorId = request.trabajadorId,
-            loteId = request.loteId,
             titulo = request.titulo,
             descripcion = request.descripcion,
             estado = request.estado ?: TaskStatus.PENDIENTE
@@ -64,7 +63,6 @@ class TaskController(
 data class CreateTaskRequest(
     val fincaId: UUID,
     val trabajadorId: UUID,
-    val loteId: UUID?,
     val titulo: String,
     val descripcion: String,
     val estado: TaskStatus?

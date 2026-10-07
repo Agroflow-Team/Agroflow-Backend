@@ -12,8 +12,14 @@ import java.util.UUID
 @RestController
 @RequestMapping("/api/vitrina")
 class VitrinaController(
-    private val manageVitrinaUseCase: ManageVitrinaUseCase
+    private val manageVitrinaUseCase: ManageVitrinaUseCase,
+    @org.springframework.beans.factory.annotation.Value("\${app.upload-dir:uploads}")
+    private val uploadDir: String
 ) {
+
+    companion object {
+        private val ALLOWED_EXTENSIONS = setOf("jpg", "jpeg", "png", "webp")
+    }
 
     @GetMapping
     fun getPublicacionesActivas(): ResponseEntity<List<Publicacion>> {
@@ -82,13 +88,13 @@ class VitrinaController(
             return ResponseEntity.badRequest().body(mapOf("error" to "File is empty"))
         }
         try {
-            val currentPath = System.getProperty("user.dir")
-            val uploadsDir = java.io.File(currentPath, "uploads")
+            val uploadsDir = java.nio.file.Paths.get(uploadDir).toAbsolutePath().normalize().toFile()
             if (!uploadsDir.exists()) {
                 uploadsDir.mkdirs()
             }
             val originalFilename = file.originalFilename ?: "image.jpg"
-            val extension = originalFilename.substringAfterLast('.', "jpg")
+            val rawExtension = originalFilename.substringAfterLast('.', "jpg").lowercase()
+            val extension = if (rawExtension in ALLOWED_EXTENSIONS) rawExtension else "jpg"
             val newFilename = "${UUID.randomUUID()}.$extension"
             
             val destFile = java.io.File(uploadsDir, newFilename)

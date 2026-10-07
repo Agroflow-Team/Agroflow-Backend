@@ -8,7 +8,6 @@ class Task(
     val id: UUID? = null,
     val fincaId: UUID,
     val trabajadorId: UUID,
-    val loteId: UUID? = null, // Puede ser nulo si la tarea no es de un lote especifico
     var titulo: String,
     var descripcion: String,
     var estado: TaskStatus,
